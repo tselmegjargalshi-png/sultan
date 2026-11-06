@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="mn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QR код · Sultan Sofrası</title>
+  <meta name="theme-color" content="#5E0C16">
+  <link rel="icon" type="image/png" href="/assets/img/emblem.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=Forum&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <style>
+    .qrwrap { max-width: 1100px; margin: 0 auto; padding: 28px 16px 60px; }
+    .qrwrap > header { text-align: center; margin-bottom: 24px; }
+    .qrwrap h1 { margin: 6px 0 8px; font-family: var(--serif); font-size: clamp(34px, 7vw, 48px); color: var(--wine-ink); }
+    .qrwrap header p { color: var(--muted); margin: 0 auto; max-width: 560px; }
+    .qrgrid { display: grid; gap: 18px; grid-template-columns: 1fr; }
+    @media (min-width: 820px) { .qrgrid { grid-template-columns: 1fr 1fr; align-items: start; } }
+    .qrcard { background: var(--paper); border: 1px solid var(--line); border-radius: 26px; padding: 16px; box-shadow: var(--shadow); }
+    .qrcard img { width: 100%; height: auto; border-radius: 16px; }
+    .qrcard h2 { margin: 14px 4px 2px; font-family: var(--serif); font-size: 28px; color: var(--wine-ink); }
+    .qrcard p { margin: 0 4px 12px; color: var(--muted); font-size: 14.5px; }
+    .qrcard .btnrow { display: flex; gap: 8px; flex-wrap: wrap; padding: 0 4px 4px; }
+    .qrcard .btn { flex: none; text-decoration: none; padding: 11px 16px; font-size: 14px; border-radius: 12px; }
+    .back { display: block; text-align: center; margin-top: 26px; color: var(--wine); font-weight: 700; }
+    @media print { .btnrow, .back, header p { display: none; } .qrcard { box-shadow: none; break-inside: avoid; } }
+  </style>
+</head>
+<body>
+  <main class="qrwrap">
+    <header>
+      <img src="/assets/img/logo-900.png" alt="Sultan Sofrası" width="900" height="475" style="width:200px;height:auto;margin:0 auto">
+      <p class="eyebrow">QR Menü</p>
+      <h1>Ширээний QR код</h1>
+      <p>Хоёр загвар хоёулаа <strong>sultansofrasi.vercel.app</strong> цэс рүү шууд үсэрнэ. Хэвлэхдээ PNG файлыг ашиглана уу. SVG файл нь томруулахад чанараа алдахгүй.</p>
+    </header>
+    <div class="qrgrid">
+      <article class="qrcard">
+        <img src="/assets/qr/qr-saray-muhru.png" alt="Saray Mührü QR код, Sultan Sofrası цэс рүү холбоно" width="2160" height="2700">
+        <h2 lang="tr">Saray Mührü</h2>
+        <p>Ордны нуман хаалганы хүрээтэй босоо постер. Ширээний стенд, хананы самбарт тохиромжтой (4:5).</p>
+        <div class="btnrow">
+          <a class="btn" href="/assets/qr/qr-saray-muhru.png" download>PNG татах</a>
+          <a class="btn btn--ghost" href="/assets/qr/qr-saray-muhru.svg" download>SVG татах</a>
+        </div>
+      </article>
+      <article class="qrcard">
+        <img src="/assets/qr/qr-cini-karo.png" alt="Çini Karo QR код, Sultan Sofrası цэс рүү холбоно" width="2160" height="2160">
+        <h2 lang="tr">Çini Karo</h2>
+        <p>Изник шаазан хавтангаас санаа авсан дөрвөлжин загвар. Наалт, ширээний тэмдэг, Instagram пост хийхэд тохиромжтой (1:1).</p>
+        <div class="btnrow">
+          <a class="btn" href="/assets/qr/qr-cini-karo.png" download>PNG татах</a>
+          <a class="btn btn--ghost" href="/assets/qr/qr-cini-karo.svg" download>SVG татах</a>
+        </div>
+      </article>
+    </div>
+    <a class="back" href="/">Цэс рүү буцах</a>
+  </main>
+</body>
+</html>

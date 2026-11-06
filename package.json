@@ -8,7 +8,9 @@
     "dev": "node scripts/dev-server.mjs",
     "qr": "node scripts/make-qr.mjs"
   },
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
     "@vercel/blob": "^2.8.2"
   },
