@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "settings": {
+    "name": "Sultan Sofrası",
+    "subtitle": "Türk Restoranı",
+    "sloganTr": "Saray lezzeti, ev sıcaklığı",
+    "sloganMn": "Ордны амт, гэрийн дулаан",
+    "notice": "Захиалгаа ширээн дээрээс зөөгчид өгнө үү",
+    "about": "Sultan Sofrası бол Османы ордны гал тогооны уламжлалыг Бурса хотын зочломтгой уур амьсгалтай хослуулсан гэр бүлийн ресторан юм. Бид махаа өдөр бүр шинээр бэлтгэж, царс модны нүүрсэн дээр шарж, талхаа чулуун зууханд жигнэдэг. Ширээнд суусан зочин бүр манай гэр бүлийн гишүүн.",
+    "since": "1998",
+    "hours": [
+      { "label": "Даваа гарагаас Пүрэв гараг", "value": "10:00 цагаас 23:00 цаг хүртэл" },
+      { "label": "Баасан ба Бямба гараг", "value": "10:00 цагаас 00:30 цаг хүртэл" },
+      { "label": "Ням гараг", "value": "09:00 цагаас 23:00 цаг хүртэл" }
+    ],
+    "openRules": [
+      { "days": [1, 2, 3, 4], "open": "10:00", "close": "23:00" },
+      { "days": [5, 6], "open": "10:00", "close": "24:30" },
+      { "days": [0], "open": "09:00", "close": "23:00" }
+    ],
+    "address": "Atatürk Caddesi No: 48, Heykel, Osmangazi, Bursa",
+    "city": "Bursa, Türkiye",
+    "mapUrl": "https://maps.google.com/?q=Atat%C3%BCrk+Caddesi+48+Osmangazi+Bursa",
+    "phone": "+90 224 221 14 53",
+    "whatsapp": "+90 532 714 53 53",
+    "instagram": "sultansofrasi.bursa",
+    "wifi": "SultanMisafir",
+    "mealCards": ["Sodexo", "Multinet", "Setcard", "Metropol Card", "Ticket Restaurant", "Edenred"],
+    "teaNote": "Хоолны дараа Türk Çayı манайхаас бэлэг",
+    "logoUrl": "",
+    "bannerUrl": "",
+    "gallery": []
+  },
+  "categories": [
+    { "id": "corbalar", "name": "Çorbalar", "subtitle": "Халуун шөл, өглөөний эхлэл" },
+    { "id": "mezeler", "name": "Mezeler", "subtitle": "Ширээ дүүргэх зууш" },
+    { "id": "kebaplar", "name": "Kebaplar", "subtitle": "Царс модны нүүрсэн дээр" },
+    { "id": "pide", "name": "Pide ve Lahmacun", "subtitle": "Чулуун зуухнаас шууд" },
+    { "id": "ana", "name": "Ana Yemekler", "subtitle": "Ордны гал тогооны үндсэн хоол" },
+    { "id": "tatlilar", "name": "Tatlılar", "subtitle": "Амтат төгсгөл" },
+    { "id": "sicak", "name": "Sıcak İçecekler", "subtitle": "Халуун ундаа" },
+    { "id": "soguk", "name": "Soğuk İçecekler", "subtitle": "Сэрүүн ундаа" }
+  ],
+  "items": [
+    { "id": "mercimek", "cat": "corbalar", "name": "Mercimek Çorbası", "desc": "Улаан сэвэг зарам, лууван, сонгино, цөцгийн тос, нимбэгтэй", "price": 170, "kcal": 230, "allergens": ["celery", "milk"], "tags": ["veg"], "image": "" },
+    { "id": "ezogelin", "cat": "corbalar", "name": "Ezogelin Çorbası", "desc": "Сэвэг зарам, булгур, улаан чинжүү, гаа навчтай уламжлалт шөл", "price": 180, "kcal": 260, "allergens": ["gluten", "celery"], "tags": ["veg", "spicy"], "image": "" },
+    { "id": "yayla", "cat": "corbalar", "name": "Yayla Çorbası", "desc": "Тараг, будаа, хатаасан гаатай зөөлөн шөл", "price": 175, "kcal": 240, "allergens": ["milk", "egg", "gluten"], "tags": ["veg"], "image": "" },
+    { "id": "iskembe", "cat": "corbalar", "name": "İşkembe Çorbası", "desc": "Үхрийн гүзээ, сармис, цуу, улаан чинжүүтэй тос", "price": 260, "kcal": 310, "allergens": ["milk", "egg", "gluten"], "tags": [], "image": "" },
+
+    { "id": "humus", "cat": "mezeler", "name": "Humus", "desc": "Вандуй, тахини, нимбэг, оливын тос, кумин", "price": 190, "kcal": 320, "allergens": ["sesame"], "tags": ["veg"], "image": "" },
+    { "id": "haydari", "cat": "mezeler", "name": "Haydari", "desc": "Өтгөн тараг, сармис, гаа, дилл ногоо", "price": 170, "kcal": 210, "allergens": ["milk"], "tags": ["veg"], "image": "" },
+    { "id": "acili-ezme", "cat": "mezeler", "name": "Acılı Ezme", "desc": "Улаан лооль, чинжүү, сонгино, яншуй, анарын исгэлэн соус", "price": 160, "kcal": 120, "allergens": ["sulphite"], "tags": ["veg", "spicy"], "image": "" },
+    { "id": "babagannus", "cat": "mezeler", "name": "Babagannuş", "desc": "Нүүрсэн дээр шарсан хаш, тахини, сармис, тараг", "price": 185, "kcal": 190, "allergens": ["sesame", "milk"], "tags": ["veg"], "image": "" },
+    { "id": "gavurdagi", "cat": "mezeler", "name": "Gavurdağı Salatası", "desc": "Жижиглэсэн ногоо, хушга, анар, анарын исгэлэн соус", "price": 210, "kcal": 230, "allergens": ["treenut", "sulphite"], "tags": ["veg"], "image": "" },
+    { "id": "sigara-boregi", "cat": "mezeler", "name": "Sigara Böreği", "desc": "Нимгэн yufka гурилд ороосон beyaz peynir бяслаг, яншуй (5 ширхэг)", "price": 220, "kcal": 380, "allergens": ["gluten", "milk", "egg"], "tags": ["veg"], "image": "" },
+    { "id": "icli-kofte", "cat": "mezeler", "name": "İçli Köfte", "desc": "Булгур бүрхүүлтэй, хушга, татсан махтай шарсан бөмбөлөг (2 ширхэг)", "price": 260, "kcal": 420, "allergens": ["gluten", "egg", "treenut"], "tags": [], "image": "" },
+    { "id": "kalamar", "cat": "mezeler", "name": "Kalamar Tava", "desc": "Шаржигнасан кальмар, тараторын соус", "price": 520, "kcal": 560, "allergens": ["mollusc", "gluten", "egg", "treenut"], "tags": [], "image": "" },
+
+    { "id": "iskender", "cat": "kebaplar", "name": "İskender Kebap", "desc": "Бурса хотын алдарт хоол: нимгэн döner мах, pide талх, улаан лоолийн соус, хайлсан цөцгийн тос, тараг", "price": 690, "kcal": 980, "allergens": ["gluten", "milk"], "tags": ["signature"], "image": "" },
+    { "id": "adana", "cat": "kebaplar", "name": "Adana Kebap", "desc": "Хурганы татсан мах, улаан чинжүү, лаваш, шарсан ногоо", "price": 590, "kcal": 820, "allergens": ["gluten"], "tags": ["spicy"], "image": "" },
+    { "id": "urfa", "cat": "kebaplar", "name": "Urfa Kebap", "desc": "Халуун ногоогүй хурганы татсан мах, сумах сонгино, лаваш", "price": 590, "kcal": 790, "allergens": ["gluten"], "tags": [], "image": "" },
+    { "id": "beyti", "cat": "kebaplar", "name": "Beyti Sarma", "desc": "Лавашанд ороосон кебаб, улаан лоолийн соус, тараг", "price": 650, "kcal": 940, "allergens": ["gluten", "milk"], "tags": [], "image": "" },
+    { "id": "ali-nazik", "cat": "kebaplar", "name": "Ali Nazik", "desc": "Утсан хаш, сармистай тараг дээр хурганы мах", "price": 640, "kcal": 760, "allergens": ["milk"], "tags": [], "image": "" },
+    { "id": "kuzu-sis", "cat": "kebaplar", "name": "Kuzu Şiş", "desc": "Даршилсан хурганы гуяны мах, будаатай pilav, шарсан чинжүү", "price": 720, "kcal": 690, "allergens": ["milk"], "tags": [], "image": "" },
+    { "id": "tavuk-sis", "cat": "kebaplar", "name": "Tavuk Şiş", "desc": "Тараг ба гаатай даршилсан тахианы мах, bulgur pilavı", "price": 450, "kcal": 560, "allergens": ["milk", "gluten"], "tags": [], "image": "" },
+    { "id": "karisik", "cat": "kebaplar", "name": "Sultan Karışık Izgara", "desc": "Хоёр хүний таваг: Adana, Urfa, Kuzu Şiş, Tavuk Şiş, pirzola, шарсан ногоо", "price": 1450, "kcal": 1850, "allergens": ["gluten", "milk"], "tags": ["signature"], "image": "" },
+
+    { "id": "kiymali-pide", "cat": "pide", "name": "Kıymalı Pide", "desc": "Татсан мах, улаан лооль, чинжүү, яншуй", "price": 380, "kcal": 720, "allergens": ["gluten"], "tags": [], "image": "" },
+    { "id": "kasarli-pide", "cat": "pide", "name": "Kaşarlı Pide", "desc": "Хайлсан kaşar бяслаг, цөцгийн тос", "price": 360, "kcal": 760, "allergens": ["gluten", "milk"], "tags": ["veg"], "image": "" },
+    { "id": "kusbasili-pide", "cat": "pide", "name": "Kuşbaşılı Pide", "desc": "Жижиглэсэн үхрийн мах, бяслаг, ногоон чинжүү", "price": 450, "kcal": 820, "allergens": ["gluten", "milk"], "tags": [], "image": "" },
+    { "id": "sucuklu-pide", "cat": "pide", "name": "Sucuklu Yumurtalı Pide", "desc": "Турк sucuk хиам, өндөг, kaşar бяслаг", "price": 420, "kcal": 860, "allergens": ["gluten", "egg", "milk", "mustard"], "tags": [], "image": "" },
+    { "id": "lahmacun", "cat": "pide", "name": "Lahmacun", "desc": "Нимгэн гурил дээр амтлагчтай мах, нимбэг, яншуй", "price": 150, "kcal": 340, "allergens": ["gluten"], "tags": ["spicy"], "image": "" },
+
+    { "id": "hunkar", "cat": "ana", "name": "Hünkar Beğendi", "desc": "Султаны таалал: утсан хашны цөцгийтэй пюре дээр удаан чанасан хурганы мах", "price": 680, "kcal": 890, "allergens": ["milk", "gluten"], "tags": ["signature"], "image": "" },
+    { "id": "karniyarik", "cat": "ana", "name": "Karnıyarık", "desc": "Махаар чихсэн хаш, улаан лоолийн соус, будаатай pilav", "price": 420, "kcal": 540, "allergens": [], "tags": [], "image": "" },
+    { "id": "manti", "cat": "ana", "name": "Kayseri Mantısı", "desc": "Жижиг банш, сармистай тараг, улаан чинжүүтэй цөцгийн тос", "price": 390, "kcal": 720, "allergens": ["gluten", "egg", "milk"], "tags": [], "image": "" },
+    { "id": "yaprak-sarma", "cat": "ana", "name": "Etli Yaprak Sarma", "desc": "Усан үзмийн навчинд ороосон мах, будаа, тараг", "price": 360, "kcal": 450, "allergens": ["milk"], "tags": [], "image": "" },
+    { "id": "levrek", "cat": "ana", "name": "Levrek Izgara", "desc": "Шарсан далайн алгана, roka салат, нимбэг", "price": 720, "kcal": 480, "allergens": ["fish"], "tags": [], "image": "" },
+    { "id": "karides", "cat": "ana", "name": "Karides Güveç", "desc": "Шавар саванд жигнэсэн сам хорхой, улаан лооль, kaşar бяслаг", "price": 640, "kcal": 520, "allergens": ["crustacean", "milk"], "tags": ["spicy"], "image": "" },
+
+    { "id": "baklava", "cat": "tatlilar", "name": "Fıstıklı Baklava", "desc": "Antep пистачио самартай 40 давхар нимгэн гурил, сироп (4 зүсэм)", "price": 420, "kcal": 620, "allergens": ["treenut", "gluten", "milk"], "tags": ["signature"], "image": "" },
+    { "id": "kunefe", "cat": "tatlilar", "name": "Künefe", "desc": "Kadayıf утсан гурил, хайлсан бяслаг, сироп, самар", "price": 380, "kcal": 710, "allergens": ["gluten", "milk", "treenut"], "tags": [], "image": "" },
+    { "id": "sutlac", "cat": "tatlilar", "name": "Fırın Sütlaç", "desc": "Зууханд шарсан сүүтэй будаа, шанцай", "price": 190, "kcal": 330, "allergens": ["milk"], "tags": ["veg"], "image": "" },
+    { "id": "kazandibi", "cat": "tatlilar", "name": "Kazandibi", "desc": "Ёроолыг нь шаргал болтол шарсан сүүтэй пудинг", "price": 210, "kcal": 360, "allergens": ["milk", "gluten"], "tags": ["veg"], "image": "" },
+    { "id": "lokum", "cat": "tatlilar", "name": "Lokum Tabağı", "desc": "Сарнай, анар, самартай Турк lokum амттан", "price": 220, "kcal": 290, "allergens": ["treenut", "peanut"], "tags": ["veg"], "image": "" },
+    { "id": "dondurma", "cat": "tatlilar", "name": "Maraş Dondurması", "desc": "Сунадаг Турк зайрмаг, пистачио самартай", "price": 200, "kcal": 280, "allergens": ["milk", "treenut"], "tags": ["veg"], "image": "" },
+
+    { "id": "cay", "cat": "sicak", "name": "Türk Çayı", "desc": "İnce belli шилэн аяганд Rize цай", "price": 40, "kcal": 2, "allergens": [], "tags": ["veg"], "image": "" },
+    { "id": "kahve", "cat": "sicak", "name": "Türk Kahvesi", "desc": "Зэс cezve саванд чанасан кофе, lokum хамт", "price": 120, "kcal": 60, "allergens": ["treenut"], "tags": ["veg"], "image": "" },
+    { "id": "menengic", "cat": "sicak", "name": "Menengiç Kahvesi", "desc": "Зэрлэг пистачио үрээр хийсэн сүүтэй ундаа", "price": 140, "kcal": 110, "allergens": ["treenut", "milk"], "tags": ["veg"], "image": "" },
+    { "id": "salep", "cat": "sicak", "name": "Salep", "desc": "Орхидейн үндэстэй халуун сүү, шанцай", "price": 160, "kcal": 220, "allergens": ["milk"], "tags": ["veg"], "image": "" },
+    { "id": "ihlamur", "cat": "sicak", "name": "Ihlamur Çayı", "desc": "Шохойн модны цэцгийн ургамлын цай, зөгийн бал", "price": 90, "kcal": 25, "allergens": [], "tags": ["veg"], "image": "" },
+
+    { "id": "ayran", "cat": "soguk", "name": "Ayran", "desc": "Хөөсөрсөн давстай тарагны ундаа", "price": 70, "kcal": 90, "allergens": ["milk"], "tags": ["veg"], "image": "" },
+    { "id": "salgam", "cat": "soguk", "name": "Şalgam Suyu", "desc": "Адана хотын исгэсэн манжингийн ундаа", "price": 80, "kcal": 25, "allergens": [], "tags": ["veg", "spicy"], "image": "" },
+    { "id": "nar-suyu", "cat": "soguk", "name": "Taze Nar Suyu", "desc": "Шинээр шахсан анарын шүүс", "price": 180, "kcal": 150, "allergens": [], "tags": ["veg"], "image": "" },
+    { "id": "limonata", "cat": "soguk", "name": "Ev Yapımı Limonata", "desc": "Гэрийн нимбэгний ундаа, гаа", "price": 130, "kcal": 140, "allergens": [], "tags": ["veg"], "image": "" },
+    { "id": "soda", "cat": "soguk", "name": "Maden Suyu", "desc": "Байгалийн рашаан ус", "price": 60, "kcal": 0, "allergens": [], "tags": ["veg"], "image": "" }
+  ]
+}

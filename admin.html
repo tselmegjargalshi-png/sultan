@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="mn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Удирдлага · Sultan Sofrası</title>
+  <meta name="theme-color" content="#5E0C16">
+  <link rel="icon" type="image/png" href="/assets/img/emblem.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=Forum&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/admin.css">
+</head>
+<body class="admin">
+  <!-- Login -->
+  <section class="login" id="login">
+    <form class="login__card" id="loginForm">
+      <img src="/assets/img/logo-900.png" alt="Sultan Sofrası" width="900" height="475" class="login__logo">
+      <p class="eyebrow">Yönetim paneli</p>
+      <h1>Удирдлагын самбар</h1>
+      <label class="field">
+        <span>Нууц үг</span>
+        <input type="password" id="pw" autocomplete="current-password" required>
+      </label>
+      <p class="err" id="loginErr" role="alert"></p>
+      <button class="btn" type="submit">Нэвтрэх</button>
+      <a class="back" href="/">Цэс рүү буцах</a>
+    </form>
+  </section>
+
+  <!-- App -->
+  <div class="app" id="app" hidden>
+    <header class="abar">
+      <img src="/assets/img/logo-900.png" alt="Sultan Sofrası" class="abar__logo" width="900" height="475">
+      <span class="abar__store" id="storeBadge"></span>
+      <div class="abar__actions">
+        <a class="btn btn--ghost btn--sm" href="/" target="_blank" rel="noopener">Цэс үзэх</a>
+        <button class="btn btn--sm" id="saveBtn" disabled>Хадгалах</button>
+        <button class="btn btn--ghost btn--sm" id="logoutBtn">Гарах</button>
+      </div>
+    </header>
+
+    <nav class="atabs" role="tablist" aria-label="Удирдлагын хэсгүүд">
+      <button role="tab" aria-selected="true" data-tab="items">Хоол</button>
+      <button role="tab" aria-selected="false" data-tab="cats">Ангилал</button>
+      <button role="tab" aria-selected="false" data-tab="images">Зураг</button>
+      <button role="tab" aria-selected="false" data-tab="info">Мэдээлэл</button>
+      <button role="tab" aria-selected="false" data-tab="backup">Нөөцлөл</button>
+    </nav>
+
+    <main class="apane">
+      <!-- Items -->
+      <section data-pane="items">
+        <div class="toolbar">
+          <label class="search"><span class="search__ico" aria-hidden="true"></span><input id="itemSearch" type="search" placeholder="Хоол хайх" aria-label="Хоол хайх"></label>
+          <select id="itemCat" aria-label="Ангиллаар шүүх"></select>
+          <button class="btn btn--sm" id="addItem">Шинэ хоол</button>
+        </div>
+        <p class="hint" id="itemCount"></p>
+        <ul class="rows" id="itemRows"></ul>
+      </section>
+
+      <!-- Categories -->
+      <section data-pane="cats" hidden>
+        <div class="toolbar"><p class="hint">Ангиллын дарааллыг сумаар өөрчилнө. Нэрийг Турк хэлээр бичнэ.</p><button class="btn btn--sm" id="addCat">Шинэ ангилал</button></div>
+        <ul class="rows" id="catRows"></ul>
+      </section>
+
+      <!-- Images -->
+      <section data-pane="images" hidden>
+        <div class="imggrid">
+          <div class="panel">
+            <h2>Лого</h2>
+            <p class="hint">Тунгалаг дэвсгэртэй PNG эсвэл SVG зөвлөмжтэй. Хоосон бол үндсэн лого харагдана.</p>
+            <div class="drop" data-slot="logoUrl"></div>
+          </div>
+          <div class="panel">
+            <h2>Нүүр баннер</h2>
+            <p class="hint">Нүүр хэсгийн арын зураг. Хэвтээ 1600 пиксел орчим зураг тохиромжтой.</p>
+            <div class="drop" data-slot="bannerUrl"></div>
+          </div>
+          <div class="panel panel--wide">
+            <h2>Галерей</h2>
+            <p class="hint">“Бидний түүх” хэсэгт харагдана. Олон зураг зэрэг сонгож болно.</p>
+            <div class="gal" id="galList"></div>
+            <label class="btn btn--ghost btn--sm upbtn">Зураг нэмэх<input type="file" accept="image/*" multiple id="galInput" hidden></label>
+          </div>
+          <div class="panel panel--wide">
+            <h2>Хоолны зураг</h2>
+            <p class="hint">Хоол бүрийн зургийг “Хоол” хэсэгт засах товч дээр дарж оруулна. Зураг оруулаагүй хоол зураггүй, цэвэрхэн харагдана.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Info -->
+      <section data-pane="info" hidden>
+        <form class="panel form" id="infoForm" autocomplete="off"></form>
+        <div class="panel">
+          <h2>Цагийн хуваарь</h2>
+          <p class="hint">Шөнө дундаас хойш хаадаг бол хаах цагийг 24:30 гэж бичнэ. Энэ нь цэсний дээд хэсгийн “Нээлттэй” тэмдгийг тооцоолоход ашиглагдана.</p>
+          <div id="hoursEditor"></div>
+          <button class="btn btn--ghost btn--sm" id="addHours" type="button">Мөр нэмэх</button>
+        </div>
+      </section>
+
+      <!-- Backup -->
+      <section data-pane="backup" hidden>
+        <div class="panel">
+          <h2>Нөөцлөл</h2>
+          <p class="hint">Цэсний бүх өгөгдлийг JSON файлаар татаж аваад дараа нь сэргээж болно.</p>
+          <div class="btnrow">
+            <button class="btn btn--sm" id="exportBtn">JSON татах</button>
+            <label class="btn btn--ghost btn--sm upbtn">JSON оруулах<input type="file" accept="application/json" id="importInput" hidden></label>
+            <button class="btn btn--ghost btn--sm danger" id="resetBtn">Анхны цэс рүү буцаах</button>
+          </div>
+          <p class="hint" id="metaInfo"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Item editor -->
+  <dialog class="modal" id="itemDlg" aria-labelledby="itemDlgTitle">
+    <form method="dialog" id="itemForm">
+      <div class="modal__head"><h2 id="itemDlgTitle">Хоол засах</h2><button class="iconbtn" value="cancel" aria-label="Хаах" formnovalidate></button></div>
+      <div class="modal__body">
+        <label class="field"><span>Нэр (Турк хэлээр)</span><input name="name" required lang="tr"></label>
+        <div class="two">
+          <label class="field"><span>Ангилал</span><select name="cat" required></select></label>
+          <label class="field"><span>Үнэ (₺)</span><input name="price" type="number" min="0" step="1" required inputmode="numeric"></label>
+        </div>
+        <label class="field"><span>Тайлбар</span><textarea name="desc" rows="3"></textarea></label>
+        <label class="field"><span>Илчлэг (kcal)</span><input name="kcal" type="number" min="0" step="1" inputmode="numeric"></label>
+        <fieldset><legend>Харшил үүсгэгч</legend><div class="algpick" id="dlgAlg"></div></fieldset>
+        <fieldset><legend>Тэмдэг</legend>
+          <label class="switch"><input type="checkbox" name="signature"><span></span> Тогоочийн онцлох</label>
+          <label class="switch"><input type="checkbox" name="spicy"><span></span> Халуун ногоотой</label>
+          <label class="switch"><input type="checkbox" name="veg"><span></span> Цагаан хоол</label>
+          <label class="switch"><input type="checkbox" name="hidden"><span></span> Цэсэнд түр нуух</label>
+        </fieldset>
+        <fieldset><legend>Хоолны зураг (заавал биш)</legend><div class="drop" data-slot="item"></div></fieldset>
+      </div>
+      <div class="modal__foot">
+        <button class="btn btn--ghost danger" value="delete" id="delItem" formnovalidate>Устгах</button>
+        <button class="btn" value="ok" id="okItem">Болсон</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="/assets/js/icons.js"></script>
+  <script src="/assets/js/admin.js"></script>
+</body>
+</html>
