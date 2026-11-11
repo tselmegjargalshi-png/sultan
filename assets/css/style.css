@@ -285,7 +285,7 @@ a { color: inherit; }
 .hours dt { font-weight: 600; }
 .hours dd { margin: 0; color: var(--muted); }
 .hours .is-today dt { color: var(--wine); }
-.hours .is-today dt::after { content: " · өнөөдөр"; color: var(--gold); font-weight: 700; }
+.hours .is-today dt::after { content: " · bugün"; color: var(--gold); font-weight: 700; }
 .contact { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .contact a, .contact span.row {
   display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; text-decoration: none;

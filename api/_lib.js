@@ -30,10 +30,10 @@ const sha = (s) => createHash('sha256').update(String(s)).digest();
 /** Returns null when authorized, otherwise an error Response. */
 export function checkAuth(request) {
   const expected = process.env.ADMIN_PASSWORD;
-  if (!expected) return json({ error: 'ADMIN_PASSWORD орчны хувьсагч тохируулагдаагүй байна' }, 500);
+  if (!expected) return json({ error: 'ADMIN_PASSWORD ortam değişkeni tanımlı değil' }, 500);
   const given = request.headers.get('x-admin-password') || '';
   if (!given || !timingSafeEqual(sha(given), sha(expected))) {
-    return json({ error: 'Нууц үг буруу байна' }, 401);
+    return json({ error: 'Şifre hatalı' }, 401);
   }
   return null;
 }
@@ -81,7 +81,7 @@ export async function writeMenu(menu) {
     await fs.writeFile(path.join(localDir(), 'menu.json'), body);
     return { url: 'local' };
   }
-  throw Object.assign(new Error('Хадгалах сан (Vercel Blob) холбогдоогүй байна'), { status: 503 });
+  throw Object.assign(new Error('Depolama (Vercel Blob) bağlı değil'), { status: 503 });
 }
 
 export async function saveImage(name, contentType, buffer) {
@@ -99,7 +99,7 @@ export async function saveImage(name, contentType, buffer) {
     await fs.writeFile(path.join(dir, file), buffer);
     return `/local-blob/images/${file}`;
   }
-  throw Object.assign(new Error('Хадгалах сан (Vercel Blob) холбогдоогүй байна'), { status: 503 });
+  throw Object.assign(new Error('Depolama (Vercel Blob) bağlı değil'), { status: 503 });
 }
 
 export async function deleteImage(url) {
@@ -114,14 +114,14 @@ export async function deleteImage(url) {
 
 /** Light validation so a malformed save can never break the public menu. */
 export function validateMenu(m) {
-  if (!m || typeof m !== 'object') return 'Өгөгдөл буруу';
-  if (!m.settings || typeof m.settings !== 'object') return 'settings байхгүй';
-  if (!Array.isArray(m.categories) || !Array.isArray(m.items)) return 'categories эсвэл items байхгүй';
-  for (const c of m.categories) if (!c.id || !c.name) return 'Ангилалд id болон нэр шаардлагатай';
+  if (!m || typeof m !== 'object') return 'Geçersiz veri';
+  if (!m.settings || typeof m.settings !== 'object') return 'settings eksik';
+  if (!Array.isArray(m.categories) || !Array.isArray(m.items)) return 'categories veya items eksik';
+  for (const c of m.categories) if (!c.id || !c.name) return 'Kategori için id ve ad gerekli';
   for (const it of m.items) {
-    if (!it.id || !it.name) return 'Хоолонд id болон нэр шаардлагатай';
-    if (typeof it.price !== 'number' || it.price < 0) return `${it.name}: үнэ буруу`;
+    if (!it.id || !it.name) return 'Yemek için id ve ad gerekli';
+    if (typeof it.price !== 'number' || it.price < 0) return `${it.name}: fiyat geçersiz`;
   }
-  if (JSON.stringify(m).length > 900_000) return 'Өгөгдөл хэт том байна';
+  if (JSON.stringify(m).length > 900_000) return 'Veri çok büyük';
   return null;
 }

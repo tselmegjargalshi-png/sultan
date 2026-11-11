@@ -2,7 +2,7 @@
 
 Live: **https://sultansofrasi.vercel.app** · Admin: **/admin** · QR codes: **/qr**
 
-A mobile first digital menu for a Turkish restaurant. UI in Mongolian, dish names, categories and prices (₺) in Turkish. Every dish shows calories and allergen badges (14 EU allergens), plus signature, spicy and vegetarian tags. No build step: static HTML/CSS/JS plus three Vercel Functions.
+A mobile first digital menu for a Turkish restaurant. Everything (UI, dishes, categories, slogans, admin) is in Turkish, prices in Turkish lira (₺). Every dish shows calories and allergen badges (14 EU allergens), plus signature, spicy and vegetarian tags. No build step: static HTML/CSS/JS plus three Vercel Functions.
 
 ## Structure
 

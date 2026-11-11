@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="mn">
+<html lang="tr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Sultan Sofrası · Türk Restoranı · Цэс</title>
-  <meta name="description" content="Sultan Sofrası Türk Restoranı, Bursa. Saray lezzeti, ev sıcaklığı. Ордны амт, гэрийн дулаан. Дижитал цэс: үнэ, калори, харшлын мэдээлэл.">
+  <title>Sultan Sofrası · Türk Restoranı · Dijital Menü</title>
+  <meta name="description" content="Sultan Sofrası Türk Restoranı, Bursa. Saray lezzeti, ev sıcaklığı. Dijital menü: fiyatlar, kaloriler ve alerjen bilgileri.">
   <meta name="theme-color" content="#5E0C16">
   <meta property="og:title" content="Sultan Sofrası · Türk Restoranı">
-  <meta property="og:description" content="Saray lezzeti, ev sıcaklığı. Ордны амт, гэрийн дулаан.">
+  <meta property="og:description" content="Saray lezzeti, ev sıcaklığı. Asırlık tarifler, bugünün sofrasında.">
   <meta property="og:image" content="/assets/img/logo-900.png">
   <link rel="icon" type="image/png" href="/assets/img/emblem.png">
   <link rel="apple-touch-icon" href="/assets/img/emblem.png">
@@ -17,22 +17,22 @@
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
-  <a class="skip" href="#menu">Цэс рүү шууд очих</a>
+  <a class="skip" href="#menu">Menüye geç</a>
 
   <header class="topbar" id="top">
     <div class="topbar__inner">
-      <a href="#top" class="brand" aria-label="Sultan Sofrası нүүр">
+      <a href="#top" class="brand" aria-label="Sultan Sofrası ana sayfa">
         <img id="brandLogo" src="/assets/img/logo-900.png" alt="Sultan Sofrası Türk Restoranı" width="900" height="475">
       </a>
       <div class="status" id="openStatus" aria-live="polite">
-        <span class="status__dot"></span><span class="status__text">Цагийн хуваарь</span>
+        <span class="status__dot"></span><span class="status__text">Çalışma saatleri</span>
       </div>
     </div>
-    <nav class="tabs" aria-label="Цэсийн ангилал">
+    <nav class="tabs" aria-label="Menü kategorileri">
       <div class="tabs__scroll" id="tabs" role="tablist"></div>
       <div class="tabs__tools">
-        <button class="tool" id="searchBtn" aria-label="Хоол хайх" aria-haspopup="dialog"></button>
-        <button class="tool" id="filterBtn" aria-label="Шүүлтүүр" aria-haspopup="dialog"><span class="tool__badge" id="filterCount" hidden>0</span></button>
+        <button class="tool" id="searchBtn" aria-label="Yemek ara" aria-haspopup="dialog"></button>
+        <button class="tool" id="filterBtn" aria-label="Filtre" aria-haspopup="dialog"><span class="tool__badge" id="filterCount" hidden>0</span></button>
       </div>
     </nav>
   </header>
@@ -43,7 +43,7 @@
       <div class="hero__arch">
         <p class="hero__kicker"><span>Hoş geldiniz</span></p>
         <h1 class="hero__title" id="heroTitle">Saray lezzeti,<br>ev sıcaklığı</h1>
-        <p class="hero__mn" id="heroMn">Ордны амт, гэрийн дулаан</p>
+        <p class="hero__mn" id="heroAlt">Asırlık tarifler, bugünün sofrasında</p>
         <div class="hero__ornament" aria-hidden="true"><i></i><b></b><i></i></div>
         <ul class="hero__facts" id="heroFacts"></ul>
       </div>
@@ -57,13 +57,13 @@
 
     <div id="menu" class="menu" tabindex="-1"></div>
 
-    <p class="empty" id="emptyState" hidden>Таны шүүлтүүрт тохирох хоол олдсонгүй. <button class="linkbtn" id="clearFilters2">Шүүлтүүрийг цэвэрлэх</button></p>
+    <p class="empty" id="emptyState" hidden>Seçtiğiniz filtrelere uyan yemek bulunamadı. <button class="linkbtn" id="clearFilters2">Filtreleri temizle</button></p>
 
     <section class="about" id="about" aria-labelledby="aboutTitle">
       <div class="about__inner">
         <img class="about__emblem" src="/assets/img/emblem.png" alt="" width="495" height="300" loading="lazy">
         <p class="eyebrow">Hikâyemiz</p>
-        <h2 id="aboutTitle">Бидний түүх</h2>
+        <h2 id="aboutTitle">Bir saray mutfağı masalı</h2>
         <p class="about__text" id="aboutText"></p>
         <p class="about__since" id="aboutSince"></p>
       </div>
@@ -71,30 +71,30 @@
     </section>
 
     <section class="legend" id="allergens" aria-labelledby="legendTitle">
-      <p class="eyebrow eyebrow--light">Alerjenler</p>
-      <h2 id="legendTitle">Харшлын тэмдэглэгээ</h2>
-      <p class="legend__hint">Хоол бүрийн доорх өнгөт тэмдэг нь тухайн харшил үүсгэгчийг агуулж буйг илтгэнэ. Харшилтай бол захиалахаасаа өмнө зөөгчид хэлээрэй.</p>
+      <p class="eyebrow eyebrow--light">Sağlığınız için</p>
+      <h2 id="legendTitle">Alerjen işaretleri</h2>
+      <p class="legend__hint">Her yemeğin altındaki renkli simgeler, o yemekte bulunan alerjenleri gösterir. Bir alerjiniz varsa lütfen siparişten önce garsonumuza bildirin.</p>
       <ul class="legend__grid" id="legendGrid"></ul>
       <div class="legend__tags">
-        <span class="tagline"><span class="tag tag--sig" aria-hidden="true"></span> Тогоочийн онцлох</span>
-        <span class="tagline"><span class="tag tag--spicy" aria-hidden="true"></span> Халуун ногоотой</span>
-        <span class="tagline"><span class="tag tag--veg" aria-hidden="true"></span> Цагаан хоол</span>
+        <span class="tagline"><span class="tag tag--sig" aria-hidden="true"></span> Şefin önerisi</span>
+        <span class="tagline"><span class="tag tag--spicy" aria-hidden="true"></span> Acılı</span>
+        <span class="tagline"><span class="tag tag--veg" aria-hidden="true"></span> Vejetaryen</span>
       </div>
     </section>
 
-    <section class="info" id="info" aria-label="Холбоо барих">
+    <section class="info" id="info" aria-label="İletişim">
       <div class="info__card">
-        <h3>Цагийн хуваарь</h3>
+        <h3>Çalışma saatleri</h3>
         <dl class="hours" id="hoursList"></dl>
       </div>
       <div class="info__card">
-        <h3>Хаяг ба холбоо</h3>
+        <h3>Adres ve iletişim</h3>
         <ul class="contact" id="contactList"></ul>
       </div>
       <div class="info__card">
-        <h3>Хүлээн авах хоолны карт</h3>
+        <h3>Geçerli yemek kartları</h3>
         <ul class="chips" id="mealCards"></ul>
-        <p class="info__note">Visa, Mastercard, Troy болон бэлэн мөнгө хүлээн авна. Үнэ Турк лирээр (₺), НӨАТ орсон.</p>
+        <p class="info__note">Visa, Mastercard, Troy ve nakit kabul edilir. Fiyatlar Türk lirasıdır (₺), KDV dahildir.</p>
       </div>
     </section>
   </main>
@@ -102,22 +102,22 @@
   <footer class="footer">
     <img src="/assets/img/logo-900.png" alt="" width="900" height="475" class="footer__logo" loading="lazy">
     <p class="footer__slogan" id="footerSlogan">Saray lezzeti, ev sıcaklığı</p>
-    <p class="footer__meta">© <span id="year"></span> Sultan Sofrası · <a href="/qr">QR код</a> · <a href="/admin" rel="nofollow">Удирдлага</a></p>
+    <p class="footer__meta">© <span id="year"></span> Sultan Sofrası · <a href="/qr">QR kodlar</a> · <a href="/admin" rel="nofollow">Yönetim</a></p>
   </footer>
 
-  <button class="totop" id="toTop" aria-label="Дээш буцах" hidden></button>
+  <button class="totop" id="toTop" aria-label="Yukarı çık" hidden></button>
 
   <!-- Search dialog -->
   <div class="sheet" id="searchSheet" role="dialog" aria-modal="true" aria-labelledby="searchTitle" hidden>
     <div class="sheet__backdrop" data-close></div>
     <div class="sheet__panel sheet__panel--top">
       <div class="sheet__head">
-        <h2 id="searchTitle" class="sr">Хоол хайх</h2>
+        <h2 id="searchTitle" class="sr">Yemek ara</h2>
         <label class="search">
           <span class="search__ico" aria-hidden="true"></span>
-          <input id="searchInput" type="search" placeholder="Хоолны нэр эсвэл орц, жишээ нь kebap, тараг" autocomplete="off" aria-label="Хайх үг">
+          <input id="searchInput" type="search" placeholder="Yemek adı veya içerik, örneğin kebap, yoğurt" autocomplete="off" aria-label="Arama">
         </label>
-        <button class="iconbtn" data-close aria-label="Хаах"></button>
+        <button class="iconbtn" data-close aria-label="Kapat"></button>
       </div>
       <ul class="results" id="searchResults" aria-live="polite"></ul>
     </div>
@@ -128,29 +128,29 @@
     <div class="sheet__backdrop" data-close></div>
     <div class="sheet__panel">
       <div class="sheet__head">
-        <h2 id="filterTitle">Шүүлтүүр</h2>
-        <button class="iconbtn" data-close aria-label="Хаах"></button>
+        <h2 id="filterTitle">Filtre</h2>
+        <button class="iconbtn" data-close aria-label="Kapat"></button>
       </div>
       <div class="sheet__body">
         <fieldset>
-          <legend>Агуулаагүй байх харшил</legend>
-          <p class="muted">Сонгосон харшлыг агуулсан хоолыг нууна.</p>
+          <legend>İçermesin</legend>
+          <p class="muted">Seçtiğiniz alerjenleri içeren yemekler gizlenir.</p>
           <div class="algpick" id="algPick"></div>
         </fieldset>
         <fieldset>
-          <legend>Онцлог</legend>
-          <label class="switch"><input type="checkbox" id="fVeg"><span></span> Зөвхөн цагаан хоол</label>
-          <label class="switch"><input type="checkbox" id="fSig"><span></span> Зөвхөн тогоочийн онцлох</label>
-          <label class="switch"><input type="checkbox" id="fNoSpicy"><span></span> Халуун ногоотойг нуух</label>
+          <legend>Özellikler</legend>
+          <label class="switch"><input type="checkbox" id="fVeg"><span></span> Sadece vejetaryen</label>
+          <label class="switch"><input type="checkbox" id="fSig"><span></span> Sadece şefin önerileri</label>
+          <label class="switch"><input type="checkbox" id="fNoSpicy"><span></span> Acılıları gizle</label>
         </fieldset>
         <fieldset>
-          <legend>Илчлэг <output id="kcalOut" for="fKcal"></output></legend>
+          <legend>Kalori <output id="kcalOut" for="fKcal"></output></legend>
           <input type="range" id="fKcal" min="100" max="2000" step="50" value="2000" aria-describedby="kcalOut">
         </fieldset>
       </div>
       <div class="sheet__foot">
-        <button class="btn btn--ghost" id="clearFilters">Цэвэрлэх</button>
-        <button class="btn" data-close id="applyFilters">Харах</button>
+        <button class="btn btn--ghost" id="clearFilters">Temizle</button>
+        <button class="btn" data-close id="applyFilters">Göster</button>
       </div>
     </div>
   </div>

@@ -19,15 +19,15 @@
         if (r.ok) return await r.json();
       } catch { /* try next */ }
     }
-    throw new Error('Цэс ачаалж чадсангүй');
+    throw new Error('Menü yüklenemedi');
   }
 
   function tagsHtml(it) {
     const t = it.tags || [];
     let h = '';
-    if (t.includes('signature')) h += `<span class="tag tag--sig">${I.ui('crown')}Тогоочийн онцлох</span>`;
-    if (t.includes('spicy')) h += `<span class="tag tag--spicy">${I.ui('flame')}Халуун</span>`;
-    if (t.includes('veg')) h += `<span class="tag tag--veg">${I.ui('leaf')}Цагаан хоол</span>`;
+    if (t.includes('signature')) h += `<span class="tag tag--sig">${I.ui('crown')}Şefin önerisi</span>`;
+    if (t.includes('spicy')) h += `<span class="tag tag--spicy">${I.ui('flame')}Acılı</span>`;
+    if (t.includes('veg')) h += `<span class="tag tag--veg">${I.ui('leaf')}Vejetaryen</span>`;
     return h;
   }
 
@@ -41,8 +41,8 @@
         ${it.desc ? `<p class="card__desc">${esc(it.desc)}</p>` : ''}
         <div class="card__foot">
           <span class="kcal">${fmt(it.kcal || 0)} kcal</span>
-          ${algs ? `<span class="algs" role="group" aria-label="Харшил: ${esc(algLabel)}">${algs}</span>` : ''}
-          <span class="price" aria-label="Үнэ ${fmt(it.price)} лира">${fmt(it.price)}<small>₺</small></span>
+          ${algs ? `<span class="algs" role="group" aria-label="Alerjenler: ${esc(algLabel)}">${algs}</span>` : ''}
+          <span class="price" aria-label="Fiyat ${fmt(it.price)} Türk lirası">${fmt(it.price)}<small>₺</small></span>
         </div>
       </div>
       ${it.image ? `<img class="card__img" src="${esc(it.image)}" alt="${esc(it.name)}" loading="lazy" decoding="async">` : ''}
@@ -137,12 +137,12 @@
     $('#emptyState').hidden = shown > 0;
     const box = $('#activeFilters');
     if (n) {
-      const bits = [...state.exclude].map((a) => `${I.allergens[a].name} агуулаагүй`);
-      if (state.veg) bits.push('Цагаан хоол');
-      if (state.sig) bits.push('Тогоочийн онцлох');
-      if (state.noSpicy) bits.push('Халуун ногоогүй');
-      if (state.maxKcal < 2000) bits.push(`${state.maxKcal} kcal хүртэл`);
-      box.innerHTML = `<span>Шүүлтүүр:</span>${bits.map((b) => `<span class="pill">${esc(b)}</span>`).join('')}<button class="linkbtn" id="clearInline">Цэвэрлэх</button>`;
+      const bits = [...state.exclude].map((a) => `${I.allergens[a].name} içermez`);
+      if (state.veg) bits.push('Vejetaryen');
+      if (state.sig) bits.push('Şefin önerisi');
+      if (state.noSpicy) bits.push('Acısız');
+      if (state.maxKcal < 2000) bits.push(`en fazla ${state.maxKcal} kcal`);
+      box.innerHTML = `<span>Filtre:</span>${bits.map((b) => `<span class="pill">${esc(b)}</span>`).join('')}<button class="linkbtn" id="clearInline">Temizle</button>`;
       box.hidden = false;
       $('#clearInline').onclick = clearFilters;
     } else { box.hidden = true; box.innerHTML = ''; }
@@ -156,7 +156,7 @@
     $$('#algPick input').forEach((i) => { i.checked = state.exclude.has(i.value); });
     $('#fVeg').checked = state.veg; $('#fSig').checked = state.sig; $('#fNoSpicy').checked = state.noSpicy;
     $('#fKcal').value = state.maxKcal;
-    $('#kcalOut').textContent = state.maxKcal >= 2000 ? 'хязгааргүй' : `${state.maxKcal} kcal хүртэл`;
+    $('#kcalOut').textContent = state.maxKcal >= 2000 ? 'sınırsız' : `en fazla ${state.maxKcal} kcal`;
   }
   function buildFilterUI() {
     $('#algPick').innerHTML = I.order.map((k) => `<label><input type="checkbox" value="${k}">${I.allergen(k)}<span>${I.allergens[k].name}</span></label>`).join('');
@@ -223,7 +223,7 @@
     const list = $('#searchResults');
     const catName = (id) => DATA.categories.find((c) => c.id === id)?.name || '';
     const items = DATA.items.filter((it) => !it.hidden && (!q || norm(it.name + ' ' + it.desc + ' ' + catName(it.cat)).includes(q)));
-    if (!items.length) { list.innerHTML = `<li class="r-empty">“${esc($('#searchInput').value)}” гэсэн хоол олдсонгүй</li>`; return; }
+    if (!items.length) { list.innerHTML = `<li class="r-empty">“${esc($('#searchInput').value)}” için sonuç bulunamadı</li>`; return; }
     list.innerHTML = items.slice(0, 60).map((it) => `<li><button data-go="${esc(it.id)}">
       <span><span class="r-name" lang="tr">${highlight(it.name, q)}</span><span class="r-cat">${esc(catName(it.cat))} · ${fmt(it.kcal || 0)} kcal</span></span>
       <span class="r-price">${fmt(it.price)} ₺</span></button></li>`).join('');
@@ -267,7 +267,7 @@
     if (!st) return;
     el.classList.toggle('is-open', st.open);
     el.classList.toggle('is-closed', !st.open);
-    $('.status__text', el).textContent = st.open ? `Нээлттэй · ${hhmm(st.until)} хүртэл` : (st.opens ? `${hhmm(st.opens)} цагт нээнэ` : 'Одоо хаалттай');
+    $('.status__text', el).textContent = st.open ? `Açık · ${hhmm(st.until)} saatine kadar` : (st.opens ? `${hhmm(st.opens)} itibarıyla açık` : 'Şu an kapalı');
   }
 
   /* ---------- Static sections ---------- */
@@ -275,12 +275,12 @@
     const s = DATA.settings;
     if (s.logoUrl) { $('#brandLogo').src = s.logoUrl; $$('.footer__logo').forEach((i) => { i.src = s.logoUrl; }); }
     if (s.sloganTr) { $('#heroTitle').innerHTML = esc(s.sloganTr).replace(/,\s*/, ',<br>'); $('#footerSlogan').textContent = s.sloganTr; }
-    if (s.sloganMn) $('#heroMn').textContent = s.sloganMn;
+    if (s.sloganAlt) $('#heroAlt').textContent = s.sloganAlt;
     if (s.bannerUrl) { const h = $('#hero'); h.classList.add('has-banner'); h.style.backgroundImage = `url("${encodeURI(s.bannerUrl)}")`; }
-    document.title = `${s.name || 'Sultan Sofrası'} · ${s.subtitle || 'Türk Restoranı'} · Цэс`;
+    document.title = `${s.name || 'Sultan Sofrası'} · ${s.subtitle || 'Türk Restoranı'} · Dijital Menü`;
 
     const facts = [];
-    if (s.since) facts.push(`${I.ui('star')}${esc(s.since)} оноос`);
+    if (s.since) facts.push(`${I.ui('star')}${esc(s.since)}’den beri`);
     if (s.city) facts.push(`${I.ui('pin')}<span lang="tr">${esc(s.city)}</span>`);
     if (s.wifi) facts.push(`${I.ui('wifi')}WiFi: ${esc(s.wifi)}`);
     $('#heroFacts').innerHTML = facts.map((f) => `<li>${f}</li>`).join('');
@@ -288,12 +288,12 @@
     $('#notice').textContent = s.notice || '';
     $('#teaNote').innerHTML = s.teaNote ? `${I.ui('tea')}<span><strong lang="tr">Çay ikramı.</strong> ${esc(s.teaNote)}</span>` : '';
     $('#aboutText').textContent = s.about || '';
-    $('#aboutSince').textContent = s.since ? `${s.since} оноос хойш нэг гал, нэг сэтгэл` : '';
+    $('#aboutSince').textContent = s.since ? `${s.since}’den beri aynı ocak, aynı gönül` : '';
 
     const g = (s.gallery || []).filter(Boolean);
     const gal = $('#gallery');
     gal.hidden = !g.length;
-    gal.innerHTML = g.map((u, i) => `<img src="${esc(u)}" alt="Sultan Sofrası зураг ${i + 1}" loading="lazy" decoding="async">`).join('');
+    gal.innerHTML = g.map((u, i) => `<img src="${esc(u)}" alt="Sultan Sofrası fotoğraf ${i + 1}" loading="lazy" decoding="async">`).join('');
 
     const { day } = istanbulNow();
     const rules = s.openRules || [];
@@ -301,8 +301,8 @@
 
     const tel = (p) => String(p).replace(/[^\d+]/g, '');
     const c = [];
-    if (s.address) c.push(`<li><a href="${esc(s.mapUrl || 'https://maps.google.com/?q=' + encodeURIComponent(s.address))}" target="_blank" rel="noopener">${I.ui('pin')}<span><span lang="tr">${esc(s.address)}</span><small>Газрын зураг дээр харах</small></span></a></li>`);
-    if (s.phone) c.push(`<li><a href="tel:${tel(s.phone)}">${I.ui('phone')}<span>${esc(s.phone)}<small>Ширээ захиалах</small></span></a></li>`);
+    if (s.address) c.push(`<li><a href="${esc(s.mapUrl || 'https://maps.google.com/?q=' + encodeURIComponent(s.address))}" target="_blank" rel="noopener">${I.ui('pin')}<span><span lang="tr">${esc(s.address)}</span><small>Haritada gör</small></span></a></li>`);
+    if (s.phone) c.push(`<li><a href="tel:${tel(s.phone)}">${I.ui('phone')}<span>${esc(s.phone)}<small>Rezervasyon</small></span></a></li>`);
     if (s.whatsapp) c.push(`<li><a href="https://wa.me/${tel(s.whatsapp).replace('+', '')}" target="_blank" rel="noopener">${I.ui('whatsapp')}<span>${esc(s.whatsapp)}<small>WhatsApp</small></span></a></li>`);
     if (s.instagram) c.push(`<li><a href="https://instagram.com/${esc(s.instagram.replace(/^@/, ''))}" target="_blank" rel="noopener">${I.ui('instagram')}<span>@${esc(s.instagram.replace(/^@/, ''))}<small>Instagram</small></span></a></li>`);
     $('#contactList').innerHTML = c.join('');
@@ -331,7 +331,7 @@
     try {
       DATA = await load();
     } catch (e) {
-      $('#menu').innerHTML = `<p class="empty">${esc(e.message)}. Хуудсаа дахин ачаална уу.</p>`;
+      $('#menu').innerHTML = `<p class="empty">${esc(e.message)}. Lütfen sayfayı yenileyin.</p>`;
       return;
     }
     renderSettings(); renderMenu(); renderStatus();

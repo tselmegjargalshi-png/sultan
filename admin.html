@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="mn">
+<html lang="tr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>Удирдлага · Sultan Sofrası</title>
+  <title>Yönetim · Sultan Sofrası</title>
   <meta name="theme-color" content="#5E0C16">
   <link rel="icon" type="image/png" href="/assets/img/emblem.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,15 +18,15 @@
   <section class="login" id="login">
     <form class="login__card" id="loginForm">
       <img src="/assets/img/logo-900.png" alt="Sultan Sofrası" width="900" height="475" class="login__logo">
-      <p class="eyebrow">Yönetim paneli</p>
-      <h1>Удирдлагын самбар</h1>
+      <p class="eyebrow">Sultan Sofrası</p>
+      <h1>Yönetim paneli</h1>
       <label class="field">
-        <span>Нууц үг</span>
+        <span>Şifre</span>
         <input type="password" id="pw" autocomplete="current-password" required>
       </label>
       <p class="err" id="loginErr" role="alert"></p>
-      <button class="btn" type="submit">Нэвтрэх</button>
-      <a class="back" href="/">Цэс рүү буцах</a>
+      <button class="btn" type="submit">Giriş yap</button>
+      <a class="back" href="/">Menüye dön</a>
     </form>
   </section>
 
@@ -36,27 +36,27 @@
       <img src="/assets/img/logo-900.png" alt="Sultan Sofrası" class="abar__logo" width="900" height="475">
       <span class="abar__store" id="storeBadge"></span>
       <div class="abar__actions">
-        <a class="btn btn--ghost btn--sm" href="/" target="_blank" rel="noopener">Цэс үзэх</a>
-        <button class="btn btn--sm" id="saveBtn" disabled>Хадгалах</button>
-        <button class="btn btn--ghost btn--sm" id="logoutBtn">Гарах</button>
+        <a class="btn btn--ghost btn--sm" href="/" target="_blank" rel="noopener">Menüyü gör</a>
+        <button class="btn btn--sm" id="saveBtn" disabled>Kaydet</button>
+        <button class="btn btn--ghost btn--sm" id="logoutBtn">Çıkış</button>
       </div>
     </header>
 
-    <nav class="atabs" role="tablist" aria-label="Удирдлагын хэсгүүд">
-      <button role="tab" aria-selected="true" data-tab="items">Хоол</button>
-      <button role="tab" aria-selected="false" data-tab="cats">Ангилал</button>
-      <button role="tab" aria-selected="false" data-tab="images">Зураг</button>
-      <button role="tab" aria-selected="false" data-tab="info">Мэдээлэл</button>
-      <button role="tab" aria-selected="false" data-tab="backup">Нөөцлөл</button>
+    <nav class="atabs" role="tablist" aria-label="Yönetim bölümleri">
+      <button role="tab" aria-selected="true" data-tab="items">Yemekler</button>
+      <button role="tab" aria-selected="false" data-tab="cats">Kategoriler</button>
+      <button role="tab" aria-selected="false" data-tab="images">Görseller</button>
+      <button role="tab" aria-selected="false" data-tab="info">Bilgiler</button>
+      <button role="tab" aria-selected="false" data-tab="backup">Yedekleme</button>
     </nav>
 
     <main class="apane">
       <!-- Items -->
       <section data-pane="items">
         <div class="toolbar">
-          <label class="search"><span class="search__ico" aria-hidden="true"></span><input id="itemSearch" type="search" placeholder="Хоол хайх" aria-label="Хоол хайх"></label>
-          <select id="itemCat" aria-label="Ангиллаар шүүх"></select>
-          <button class="btn btn--sm" id="addItem">Шинэ хоол</button>
+          <label class="search"><span class="search__ico" aria-hidden="true"></span><input id="itemSearch" type="search" placeholder="Yemek ara" aria-label="Yemek ara"></label>
+          <select id="itemCat" aria-label="Kategoriye göre filtrele"></select>
+          <button class="btn btn--sm" id="addItem">Yeni yemek</button>
         </div>
         <p class="hint" id="itemCount"></p>
         <ul class="rows" id="itemRows"></ul>
@@ -64,7 +64,7 @@
 
       <!-- Categories -->
       <section data-pane="cats" hidden>
-        <div class="toolbar"><p class="hint">Ангиллын дарааллыг сумаар өөрчилнө. Нэрийг Турк хэлээр бичнэ.</p><button class="btn btn--sm" id="addCat">Шинэ ангилал</button></div>
+        <div class="toolbar"><p class="hint">Kategori sırasını oklarla değiştirin.</p><button class="btn btn--sm" id="addCat">Yeni kategori</button></div>
         <ul class="rows" id="catRows"></ul>
       </section>
 
@@ -72,24 +72,24 @@
       <section data-pane="images" hidden>
         <div class="imggrid">
           <div class="panel">
-            <h2>Лого</h2>
-            <p class="hint">Тунгалаг дэвсгэртэй PNG эсвэл SVG зөвлөмжтэй. Хоосон бол үндсэн лого харагдана.</p>
+            <h2>Logo</h2>
+            <p class="hint">Şeffaf arka planlı PNG veya SVG önerilir. Boş bırakılırsa varsayılan logo görünür.</p>
             <div class="drop" data-slot="logoUrl"></div>
           </div>
           <div class="panel">
-            <h2>Нүүр баннер</h2>
-            <p class="hint">Нүүр хэсгийн арын зураг. Хэвтээ 1600 пиксел орчим зураг тохиромжтой.</p>
+            <h2>Kapak görseli</h2>
+            <p class="hint">Giriş bölümünün arka plan görseli. Yaklaşık 1600 piksel genişlikte yatay bir görsel uygundur.</p>
             <div class="drop" data-slot="bannerUrl"></div>
           </div>
           <div class="panel panel--wide">
-            <h2>Галерей</h2>
-            <p class="hint">“Бидний түүх” хэсэгт харагдана. Олон зураг зэрэг сонгож болно.</p>
+            <h2>Galeri</h2>
+            <p class="hint">Hikâyemiz bölümünde görünür. Aynı anda birden fazla görsel seçebilirsiniz.</p>
             <div class="gal" id="galList"></div>
-            <label class="btn btn--ghost btn--sm upbtn">Зураг нэмэх<input type="file" accept="image/*" multiple id="galInput" hidden></label>
+            <label class="btn btn--ghost btn--sm upbtn">Görsel ekle<input type="file" accept="image/*" multiple id="galInput" hidden></label>
           </div>
           <div class="panel panel--wide">
-            <h2>Хоолны зураг</h2>
-            <p class="hint">Хоол бүрийн зургийг “Хоол” хэсэгт засах товч дээр дарж оруулна. Зураг оруулаагүй хоол зураггүй, цэвэрхэн харагдана.</p>
+            <h2>Yemek görselleri</h2>
+            <p class="hint">Her yemeğin görselini Yemekler sekmesinde Düzenle düğmesine basarak ekleyin. Görseli olmayan yemekler sade ve şık görünür.</p>
           </div>
         </div>
       </section>
@@ -98,22 +98,22 @@
       <section data-pane="info" hidden>
         <form class="panel form" id="infoForm" autocomplete="off"></form>
         <div class="panel">
-          <h2>Цагийн хуваарь</h2>
-          <p class="hint">Шөнө дундаас хойш хаадаг бол хаах цагийг 24:30 гэж бичнэ. Энэ нь цэсний дээд хэсгийн “Нээлттэй” тэмдгийг тооцоолоход ашиглагдана.</p>
+          <h2>Çalışma saatleri</h2>
+          <p class="hint">Gece yarısından sonra kapanıyorsa kapanış saatini 24:30 olarak yazın. Bu bilgi menünün üstündeki “Açık” etiketini hesaplamak için kullanılır.</p>
           <div id="hoursEditor"></div>
-          <button class="btn btn--ghost btn--sm" id="addHours" type="button">Мөр нэмэх</button>
+          <button class="btn btn--ghost btn--sm" id="addHours" type="button">Satır ekle</button>
         </div>
       </section>
 
       <!-- Backup -->
       <section data-pane="backup" hidden>
         <div class="panel">
-          <h2>Нөөцлөл</h2>
-          <p class="hint">Цэсний бүх өгөгдлийг JSON файлаар татаж аваад дараа нь сэргээж болно.</p>
+          <h2>Yedekleme</h2>
+          <p class="hint">Menünün tüm verilerini JSON dosyası olarak indirip daha sonra geri yükleyebilirsiniz.</p>
           <div class="btnrow">
-            <button class="btn btn--sm" id="exportBtn">JSON татах</button>
-            <label class="btn btn--ghost btn--sm upbtn">JSON оруулах<input type="file" accept="application/json" id="importInput" hidden></label>
-            <button class="btn btn--ghost btn--sm danger" id="resetBtn">Анхны цэс рүү буцаах</button>
+            <button class="btn btn--sm" id="exportBtn">JSON indir</button>
+            <label class="btn btn--ghost btn--sm upbtn">JSON yükle<input type="file" accept="application/json" id="importInput" hidden></label>
+            <button class="btn btn--ghost btn--sm danger" id="resetBtn">Varsayılan menüye dön</button>
           </div>
           <p class="hint" id="metaInfo"></p>
         </div>
@@ -124,27 +124,27 @@
   <!-- Item editor -->
   <dialog class="modal" id="itemDlg" aria-labelledby="itemDlgTitle">
     <form method="dialog" id="itemForm">
-      <div class="modal__head"><h2 id="itemDlgTitle">Хоол засах</h2><button class="iconbtn" value="cancel" aria-label="Хаах" formnovalidate></button></div>
+      <div class="modal__head"><h2 id="itemDlgTitle">Yemeği düzenle</h2><button class="iconbtn" value="cancel" aria-label="Kapat" formnovalidate></button></div>
       <div class="modal__body">
-        <label class="field"><span>Нэр (Турк хэлээр)</span><input name="name" required lang="tr"></label>
+        <label class="field"><span>Ad</span><input name="name" required lang="tr"></label>
         <div class="two">
-          <label class="field"><span>Ангилал</span><select name="cat" required></select></label>
-          <label class="field"><span>Үнэ (₺)</span><input name="price" type="number" min="0" step="1" required inputmode="numeric"></label>
+          <label class="field"><span>Kategori</span><select name="cat" required></select></label>
+          <label class="field"><span>Fiyat (₺)</span><input name="price" type="number" min="0" step="1" required inputmode="numeric"></label>
         </div>
-        <label class="field"><span>Тайлбар</span><textarea name="desc" rows="3"></textarea></label>
-        <label class="field"><span>Илчлэг (kcal)</span><input name="kcal" type="number" min="0" step="1" inputmode="numeric"></label>
-        <fieldset><legend>Харшил үүсгэгч</legend><div class="algpick" id="dlgAlg"></div></fieldset>
-        <fieldset><legend>Тэмдэг</legend>
-          <label class="switch"><input type="checkbox" name="signature"><span></span> Тогоочийн онцлох</label>
-          <label class="switch"><input type="checkbox" name="spicy"><span></span> Халуун ногоотой</label>
-          <label class="switch"><input type="checkbox" name="veg"><span></span> Цагаан хоол</label>
-          <label class="switch"><input type="checkbox" name="hidden"><span></span> Цэсэнд түр нуух</label>
+        <label class="field"><span>Açıklama</span><textarea name="desc" rows="3"></textarea></label>
+        <label class="field"><span>Kalori (kcal)</span><input name="kcal" type="number" min="0" step="1" inputmode="numeric"></label>
+        <fieldset><legend>Alerjenler</legend><div class="algpick" id="dlgAlg"></div></fieldset>
+        <fieldset><legend>Etiketler</legend>
+          <label class="switch"><input type="checkbox" name="signature"><span></span> Şefin önerisi</label>
+          <label class="switch"><input type="checkbox" name="spicy"><span></span> Acılı</label>
+          <label class="switch"><input type="checkbox" name="veg"><span></span> Vejetaryen</label>
+          <label class="switch"><input type="checkbox" name="hidden"><span></span> Menüde geçici olarak gizle</label>
         </fieldset>
-        <fieldset><legend>Хоолны зураг (заавал биш)</legend><div class="drop" data-slot="item"></div></fieldset>
+        <fieldset><legend>Yemek görseli (isteğe bağlı)</legend><div class="drop" data-slot="item"></div></fieldset>
       </div>
       <div class="modal__foot">
-        <button class="btn btn--ghost danger" value="delete" id="delItem" formnovalidate>Устгах</button>
-        <button class="btn" value="ok" id="okItem">Болсон</button>
+        <button class="btn btn--ghost danger" value="delete" id="delItem" formnovalidate>Sil</button>
+        <button class="btn" value="ok" id="okItem">Tamam</button>
       </div>
     </form>
   </dialog>

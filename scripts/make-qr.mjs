@@ -54,9 +54,9 @@ function design1() {
   ${finders.map(eye).join('')}
   <circle cx="${c}" cy="${cy}" r="${S * 5}" fill="#FFFAF1" stroke="url(#gold)" stroke-width="4"/>
   <image href="${EMBLEM}" x="${c - S * 3.6}" y="${cy - S * 2.3}" width="${S * 7.2}" height="${S * 4.4}"/>
-  <g font-family="Cormorant Garamond, serif" text-anchor="middle">
-    <text x="${c}" y="${oy + qs + 92}" font-size="56" font-weight="700" fill="#4A0911">Цэсээ уншуулаарай</text>
-    <text x="${c}" y="${oy + qs + 140}" font-size="34" font-style="italic" fill="#B5862E">Menüyü okutun · Saray lezzeti, ev sıcaklığı</text>
+  <g font-family="Cormorant Garamond, Lora, serif" text-anchor="middle">
+    <text x="${c}" y="${oy + qs + 92}" font-size="56" font-weight="700" fill="#4A0911">Menüyü okutun</text>
+    <text x="${c}" y="${oy + qs + 140}" font-size="34" font-style="italic" fill="#B5862E">Saray lezzeti, ev sıcaklığı</text>
   </g>
   <g font-family="Manrope, sans-serif" text-anchor="middle"><text x="${c}" y="${H - 116}" font-size="24" font-weight="700" letter-spacing="3" fill="#76604F">${URL_.replace(/^https?:\/\//, '').toUpperCase()}</text></g>
 </svg>`;
@@ -104,8 +104,8 @@ function design2() {
   <circle cx="${c}" cy="${cy}" r="${S * 3.5}" fill="#FFF8EA"/>
   <image href="${EMBLEM}" x="${c - S * 2.9}" y="${cy - S * 1.75}" width="${S * 5.8}" height="${S * 3.5}"/>
   <g text-anchor="middle">
-    <text x="${c}" y="${py + plate + 74}" font-family="Cormorant Garamond, serif" font-size="46" font-style="italic" font-weight="600" fill="#FFF1D6">Ордны амт, гэрийн дулаан</text>
-    <text x="${c}" y="${py + plate + 118}" font-family="Manrope, sans-serif" font-size="22" font-weight="700" letter-spacing="5" fill="#D8AE5C">QR MENÜ · ЦЭС УНШУУЛАХ</text>
+    <text x="${c}" y="${py + plate + 74}" font-family="Cormorant Garamond, Lora, serif" font-size="44" font-style="italic" font-weight="600" fill="#FFF1D6">Sofra kuruldu, buyurun efendim</text>
+    <text x="${c}" y="${py + plate + 118}" font-family="Manrope, Poppins, sans-serif" font-size="22" font-weight="700" letter-spacing="5" fill="#D8AE5C">QR MENÜ · OKUT VE KEŞFET</text>
   </g>
 </svg>`;
 }

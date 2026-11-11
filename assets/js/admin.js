@@ -8,7 +8,7 @@
   const fmt = (n) => Number(n || 0).toLocaleString('tr-TR');
   const DRAFT_KEY = 'ss_admin_draft';
   const PW_KEY = 'ss_admin_pw';
-  const DAYS = ['Ня', 'Да', 'Мя', 'Лх', 'Пү', 'Ба', 'Бя']; // 0 = Sunday
+  const DAYS = ['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt']; // 0 = Sunday
   const ss = { get: (k) => { try { return sessionStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { sessionStorage.setItem(k, v); } catch {} }, del: (k) => { try { sessionStorage.removeItem(k); } catch {} } };
   const ls = { get: (k) => { try { return localStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch {} }, del: (k) => { try { localStorage.removeItem(k); } catch {} } };
 
@@ -27,19 +27,19 @@
   async function api(path, opts = {}) {
     const r = await fetch(path, { ...opts, headers: { 'x-admin-password': pw, ...(opts.headers || {}) } });
     let data = {}; try { data = await r.json(); } catch {}
-    if (!r.ok) throw Object.assign(new Error(data.error || `Алдаа (${r.status})`), { status: r.status });
+    if (!r.ok) throw Object.assign(new Error(data.error || `Hata (${r.status})`), { status: r.status });
     return data;
   }
   const slug = (s) => String(s).toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ı/g, 'i').replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '') || 'x';
   const uid = (base, list) => { let id = slug(base), n = 2; while (list.some((x) => x.id === id)) id = slug(base) + '_' + n++; return id; };
   function markDirty() {
     dirty = true;
-    $('#saveBtn').disabled = false; $('#saveBtn').classList.add('is-dirty'); $('#saveBtn').textContent = 'Хадгалах •';
+    $('#saveBtn').disabled = false; $('#saveBtn').classList.add('is-dirty'); $('#saveBtn').textContent = 'Kaydet •';
     ls.set(DRAFT_KEY, JSON.stringify(M));
   }
   function markClean() {
     dirty = false;
-    $('#saveBtn').disabled = true; $('#saveBtn').classList.remove('is-dirty'); $('#saveBtn').textContent = 'Хадгалсан';
+    $('#saveBtn').disabled = true; $('#saveBtn').classList.remove('is-dirty'); $('#saveBtn').textContent = 'Kaydedildi';
     ls.del(DRAFT_KEY);
   }
   addEventListener('beforeunload', (e) => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
@@ -58,7 +58,7 @@
     catch (err) { $('#loginErr').textContent = err.message; }
   });
   $('#logoutBtn').onclick = () => {
-    if (dirty && !confirm('Хадгалаагүй өөрчлөлт байна. Гарах уу?')) return;
+    if (dirty && !confirm('Kaydedilmemiş değişiklikler var. Çıkılsın mı?')) return;
     ss.del(PW_KEY); pw = ''; location.reload();
   };
 
@@ -68,14 +68,14 @@
     meta = data._meta || {}; delete data._meta;
     M = data;
     const draft = ls.get(DRAFT_KEY);
-    if (draft && confirm('Өмнө нь хадгалаагүй үлдсэн ноорог байна. Сэргээх үү?')) { try { M = JSON.parse(draft); } catch {} }
+    if (draft && confirm('Kaydedilmemiş bir taslak bulundu. Geri yüklensin mi?')) { try { M = JSON.parse(draft); } catch {} }
     else ls.del(DRAFT_KEY);
     M.settings.gallery ||= [];
     $('#login').hidden = true; $('#app').hidden = false;
     const b = $('#storeBadge');
-    if (storage === 'blob') { b.textContent = 'Vercel Blob холбогдсон'; b.className = 'abar__store ok'; }
-    else if (storage === 'local') { b.textContent = 'Локал хадгалалт (туршилт)'; b.className = 'abar__store ok'; }
-    else { b.textContent = 'Хадгалах сан холбогдоогүй'; b.className = 'abar__store warn'; }
+    if (storage === 'blob') { b.textContent = 'Vercel Blob bağlı'; b.className = 'abar__store ok'; }
+    else if (storage === 'local') { b.textContent = 'Yerel depolama (test)'; b.className = 'abar__store ok'; }
+    else { b.textContent = 'Depolama bağlı değil'; b.className = 'abar__store warn'; }
     renderAll();
     draft && M !== data ? markDirty() : markClean();
   }
@@ -91,31 +91,31 @@
   /* ---------- items ---------- */
   function renderCatSelect() {
     const sel = $('#itemCat'); const v = sel.value;
-    sel.innerHTML = '<option value="">Бүх ангилал</option>' + M.categories.map((c) => `<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('');
+    sel.innerHTML = '<option value="">Tüm kategoriler</option>' + M.categories.map((c) => `<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('');
     sel.value = M.categories.some((c) => c.id === v) ? v : '';
   }
   function renderItems() {
     const q = $('#itemSearch').value.trim().toLocaleLowerCase('tr-TR');
     const cat = $('#itemCat').value;
-    const catName = (id) => M.categories.find((c) => c.id === id)?.name || 'Ангилалгүй';
+    const catName = (id) => M.categories.find((c) => c.id === id)?.name || 'Kategorisiz';
     const list = M.items.filter((it) => (!cat || it.cat === cat) && (!q || (it.name + ' ' + it.desc).toLocaleLowerCase('tr-TR').includes(q)));
-    $('#itemCount').textContent = `${list.length} хоол харагдаж байна (нийт ${M.items.length})`;
+    $('#itemCount').textContent = `${list.length} yemek gösteriliyor (toplam ${M.items.length})`;
     $('#itemRows').innerHTML = list.map((it) => {
       const idx = M.items.indexOf(it);
       return `<li class="row ${it.hidden ? 'is-hidden' : ''}">
         ${it.image ? `<img class="row__thumb" src="${esc(it.image)}" alt="">` : `<span class="row__thumb">${I.ui('star', 'ico')}</span>`}
         <div class="row__main">
           <div class="row__name" lang="tr">${esc(it.name)}</div>
-          <div class="row__meta"><span>${esc(catName(it.cat))}</span><span>${fmt(it.kcal)} kcal</span>${(it.allergens || []).map((a) => I.allergen(a)).join('')}${it.hidden ? '<b>Нуусан</b>' : ''}</div>
+          <div class="row__meta"><span>${esc(catName(it.cat))}</span><span>${fmt(it.kcal)} kcal</span>${(it.allergens || []).map((a) => I.allergen(a)).join('')}${it.hidden ? '<b>Gizli</b>' : ''}</div>
         </div>
         <span class="row__price">${fmt(it.price)} ₺</span>
         <div class="row__btns">
-          <button class="mini" data-act="up" data-i="${idx}" aria-label="Дээш" ${idx === 0 ? 'disabled' : ''}>↑</button>
-          <button class="mini" data-act="down" data-i="${idx}" aria-label="Доош" ${idx === M.items.length - 1 ? 'disabled' : ''}>↓</button>
-          <button class="btn btn--ghost btn--sm" data-act="edit" data-i="${idx}">Засах</button>
+          <button class="mini" data-act="up" data-i="${idx}" aria-label="Yukarı" ${idx === 0 ? 'disabled' : ''}>↑</button>
+          <button class="mini" data-act="down" data-i="${idx}" aria-label="Aşağı" ${idx === M.items.length - 1 ? 'disabled' : ''}>↓</button>
+          <button class="btn btn--ghost btn--sm" data-act="edit" data-i="${idx}">Düzenle</button>
         </div>
       </li>`;
-    }).join('') || '<li class="hint">Хоол олдсонгүй</li>';
+    }).join('') || '<li class="hint">Yemek bulunamadı</li>';
   }
   $('#itemSearch').addEventListener('input', renderItems);
   $('#itemCat').addEventListener('change', renderItems);
@@ -135,7 +135,7 @@
     editIdx = i;
     const it = i >= 0 ? M.items[i] : { name: '', cat: $('#itemCat').value || M.categories[0]?.id, desc: '', price: 0, kcal: 0, allergens: [], tags: [], image: '' };
     const f = $('#itemForm');
-    $('#itemDlgTitle').textContent = i >= 0 ? 'Хоол засах' : 'Шинэ хоол';
+    $('#itemDlgTitle').textContent = i >= 0 ? 'Yemeği düzenle' : 'Yeni yemek';
     f.cat.innerHTML = M.categories.map((c) => `<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('');
     f.name.value = it.name; f.cat.value = it.cat; f.desc.value = it.desc || ''; f.price.value = it.price; f.kcal.value = it.kcal || 0;
     f.signature.checked = (it.tags || []).includes('signature'); f.spicy.checked = (it.tags || []).includes('spicy'); f.veg.checked = (it.tags || []).includes('veg');
@@ -149,7 +149,7 @@
   $('#itemDlg').addEventListener('close', () => {
     const v = $('#itemDlg').returnValue; const f = $('#itemForm');
     if (v === 'delete' && editIdx >= 0) {
-      if (confirm(`“${M.items[editIdx].name}” хоолыг устгах уу?`)) { M.items.splice(editIdx, 1); markDirty(); renderItems(); toast('Устгалаа. Хадгалах товчийг дарна уу.'); }
+      if (confirm(`“${M.items[editIdx].name}” silinsin mi?`)) { M.items.splice(editIdx, 1); markDirty(); renderItems(); toast('Silindi. Lütfen Kaydet düğmesine basın.'); }
       return;
     }
     if (v !== 'ok') return;
@@ -159,7 +159,7 @@
       price: Math.max(0, Number(f.price.value) || 0), kcal: Math.max(0, Number(f.kcal.value) || 0),
       allergens: $$('#dlgAlg input:checked').map((x) => x.value), tags, image: editImage, hidden: f.hidden.checked,
     };
-    if (!data.name) return toast('Нэр шаардлагатай', true);
+    if (!data.name) return toast('Ad gerekli', true);
     if (editIdx >= 0) Object.assign(M.items[editIdx], data);
     else M.items.push({ id: uid(data.name, M.items), ...data });
     markDirty(); renderItems();
@@ -173,15 +173,15 @@
       const n = M.items.filter((it) => it.cat === c.id).length;
       return `<li class="row ${c.hidden ? 'is-hidden' : ''}">
         <div class="catrow">
-          <input data-f="name" data-i="${i}" value="${esc(c.name)}" aria-label="Ангиллын нэр" lang="tr">
-          <input data-f="subtitle" data-i="${i}" value="${esc(c.subtitle || '')}" aria-label="Дэд гарчиг" placeholder="Дэд гарчиг">
+          <input data-f="name" data-i="${i}" value="${esc(c.name)}" aria-label="Kategori adı" lang="tr">
+          <input data-f="subtitle" data-i="${i}" value="${esc(c.subtitle || '')}" aria-label="Alt başlık" placeholder="Alt başlık">
         </div>
-        <span class="hint" style="margin:0">${n} хоол</span>
+        <span class="hint" style="margin:0">${n} yemek</span>
         <div class="row__btns">
-          <button class="mini" data-act="up" data-i="${i}" aria-label="Дээш" ${i === 0 ? 'disabled' : ''}>↑</button>
-          <button class="mini" data-act="down" data-i="${i}" aria-label="Доош" ${i === M.categories.length - 1 ? 'disabled' : ''}>↓</button>
-          <button class="btn btn--ghost btn--sm" data-act="hide" data-i="${i}">${c.hidden ? 'Харуулах' : 'Нуух'}</button>
-          <button class="btn btn--ghost btn--sm danger" data-act="del" data-i="${i}">Устгах</button>
+          <button class="mini" data-act="up" data-i="${i}" aria-label="Yukarı" ${i === 0 ? 'disabled' : ''}>↑</button>
+          <button class="mini" data-act="down" data-i="${i}" aria-label="Aşağı" ${i === M.categories.length - 1 ? 'disabled' : ''}>↓</button>
+          <button class="btn btn--ghost btn--sm" data-act="hide" data-i="${i}">${c.hidden ? 'Göster' : 'Gizle'}</button>
+          <button class="btn btn--ghost btn--sm danger" data-act="del" data-i="${i}">Sil</button>
         </div>
       </li>`;
     }).join('');
@@ -196,8 +196,8 @@
     if (b.dataset.act === 'hide') c.hidden = !c.hidden;
     else if (b.dataset.act === 'del') {
       const n = M.items.filter((it) => it.cat === c.id).length;
-      if (n && !confirm(`“${c.name}” ангилалд ${n} хоол байна. Ангилал болон эдгээр хоолыг устгах уу?`)) return;
-      if (!n && !confirm(`“${c.name}” ангиллыг устгах уу?`)) return;
+      if (n && !confirm(`“${c.name}” kategorisinde ${n} yemek var. Kategori ve bu yemekler silinsin mi?`)) return;
+      if (!n && !confirm(`“${c.name}” kategorisi silinsin mi?`)) return;
       M.items = M.items.filter((it) => it.cat !== c.id); M.categories.splice(i, 1);
     } else {
       const j = b.dataset.act === 'up' ? i - 1 : i + 1;
@@ -207,14 +207,14 @@
     markDirty(); renderCats(); renderCatSelect(); renderItems();
   });
   $('#addCat').onclick = () => {
-    const name = prompt('Шинэ ангиллын нэр (Турк хэлээр):'); if (!name) return;
+    const name = prompt('Yeni kategori adı:'); if (!name) return;
     M.categories.push({ id: uid(name, M.categories), name: name.trim(), subtitle: '' });
     markDirty(); renderCats(); renderCatSelect();
   };
 
   /* ---------- images ---------- */
   async function prepareImage(file, { maxSide = 1600, keepPng = false } = {}) {
-    if (!/^image\//.test(file.type)) throw new Error('Зөвхөн зураг сонгоно уу');
+    if (!/^image\//.test(file.type)) throw new Error('Lütfen sadece görsel seçin');
     if (/svg|gif/.test(file.type)) return file; // keep vector / animation as is
     const bmp = await createImageBitmap(file).catch(() => null);
     if (!bmp) return file;
@@ -228,9 +228,9 @@
     return blob.size < file.size || scale < 1 ? new File([blob], file.name.replace(/\.\w+$/, keepPng ? '.png' : '.webp'), { type }) : file;
   }
   async function upload(file, opts) {
-    if (storage === 'none') throw new Error('Хадгалах сан холбогдоогүй тул зураг оруулах боломжгүй');
+    if (storage === 'none') throw new Error('Depolama bağlı olmadığı için görsel yüklenemiyor');
     const f = await prepareImage(file, opts);
-    if (f.size > 4 * 1024 * 1024) throw new Error('Зураг хэт том байна (4 MB хүртэл)');
+    if (f.size > 4 * 1024 * 1024) throw new Error('Görsel çok büyük (en fazla 4 MB)');
     const r = await api('/api/upload?name=' + encodeURIComponent(f.name || 'image'), { method: 'POST', headers: { 'content-type': f.type }, body: f });
     return r.url;
   }
@@ -239,14 +239,14 @@
     try { await api('/api/upload?url=' + encodeURIComponent(url), { method: 'DELETE' }); } catch { /* not critical */ }
   }
   function renderDrop(el, url, onChange, opts) {
-    el.innerHTML = `${url ? `<img src="${esc(url)}" alt="Сонгосон зураг">` : '<p class="hint">Зураг сонгоогүй байна. Энд чирж тавьж болно.</p>'}
-      <div class="btnrow"><label class="btn btn--sm upbtn">${url ? 'Солих' : 'Зураг сонгох'}<input type="file" accept="image/*" hidden></label>
-      ${url ? '<button type="button" class="btn btn--ghost btn--sm danger" data-rm>Арилгах</button>' : ''}</div>`;
+    el.innerHTML = `${url ? `<img src="${esc(url)}" alt="Seçilen görsel">` : '<p class="hint">Henüz görsel seçilmedi. Buraya sürükleyip bırakabilirsiniz.</p>'}
+      <div class="btnrow"><label class="btn btn--sm upbtn">${url ? 'Değiştir' : 'Görsel seç'}<input type="file" accept="image/*" hidden></label>
+      ${url ? '<button type="button" class="btn btn--ghost btn--sm danger" data-rm>Kaldır</button>' : ''}</div>`;
     const set = async (file) => {
       try {
-        el.querySelector('.btnrow').innerHTML = '<span class="hint">Байршуулж байна…</span>';
+        el.querySelector('.btnrow').innerHTML = '<span class="hint">Yükleniyor…</span>';
         const u = await upload(file, opts);
-        onChange(u); markDirty(); renderDrop(el, u, onChange, opts); toast('Зураг орлоо. Хадгалах товчийг дарна уу.');
+        onChange(u); markDirty(); renderDrop(el, u, onChange, opts); toast('Görsel yüklendi. Lütfen Kaydet düğmesine basın.');
       } catch (err) { toast(err.message, true); renderDrop(el, url, onChange, opts); }
     };
     el.querySelector('input').onchange = (e) => e.target.files[0] && set(e.target.files[0]);
@@ -259,7 +259,7 @@
   function renderImages() {
     renderDrop($('[data-slot="logoUrl"]'), M.settings.logoUrl, (u) => { M.settings.logoUrl = u; }, { maxSide: 1400, keepPng: true });
     renderDrop($('[data-slot="bannerUrl"]'), M.settings.bannerUrl, (u) => { M.settings.bannerUrl = u; }, { maxSide: 2000 });
-    $('#galList').innerHTML = M.settings.gallery.map((u, i) => `<figure><img src="${esc(u)}" alt="Галерей ${i + 1}"><button data-gi="${i}" aria-label="Устгах">${I.ui('close')}</button></figure>`).join('') || '<p class="hint">Галерей хоосон байна.</p>';
+    $('#galList').innerHTML = M.settings.gallery.map((u, i) => `<figure><img src="${esc(u)}" alt="Galeri ${i + 1}"><button data-gi="${i}" aria-label="Sil">${I.ui('close')}</button></figure>`).join('') || '<p class="hint">Galeri boş.</p>';
   }
   $('#galList').addEventListener('click', (e) => {
     const b = e.target.closest('[data-gi]'); if (!b) return;
@@ -268,24 +268,24 @@
   $('#galInput').addEventListener('change', async (e) => {
     const files = [...e.target.files]; e.target.value = '';
     for (const f of files) {
-      try { toast(`Байршуулж байна: ${f.name}`); M.settings.gallery.push(await upload(f)); markDirty(); renderImages(); }
+      try { toast(`Yükleniyor: ${f.name}`); M.settings.gallery.push(await upload(f)); markDirty(); renderImages(); }
       catch (err) { toast(err.message, true); break; }
     }
   });
 
   /* ---------- info ---------- */
   const FIELDS = [
-    ['name', 'Рестораны нэр'], ['subtitle', 'Дэд нэр'],
-    ['sloganTr', 'Уриа үг (Турк)'], ['sloganMn', 'Уриа үг (Монгол)'],
-    ['notice', 'Дээд мэдэгдэл', 'full'], ['teaNote', 'Цайны бэлэгийн мэдэгдэл', 'full'],
-    ['about', 'Бидний түүх', 'full', 'textarea'], ['since', 'Үүсгэсэн он'], ['city', 'Хот'],
-    ['address', 'Хаяг', 'full'], ['mapUrl', 'Газрын зургийн холбоос', 'full'],
-    ['phone', 'Утас'], ['whatsapp', 'WhatsApp'], ['instagram', 'Instagram хаяг (@ гүйгээр)'], ['wifi', 'WiFi нэр'],
-    ['mealCards', 'Хоолны картууд (таслалаар тусгаарлана)', 'full'],
+    ['name', 'Restoran adı'], ['subtitle', 'Alt ad'],
+    ['sloganTr', 'Ana slogan'], ['sloganAlt', 'İkinci slogan'],
+    ['notice', 'Üst duyuru', 'full'], ['teaNote', 'Çay ikramı notu', 'full'],
+    ['about', 'Hikâyemiz', 'full', 'textarea'], ['since', 'Kuruluş yılı'], ['city', 'Şehir'],
+    ['address', 'Adres', 'full'], ['mapUrl', 'Harita bağlantısı', 'full'],
+    ['phone', 'Telefon'], ['whatsapp', 'WhatsApp'], ['instagram', 'Instagram kullanıcı adı (@ olmadan)'], ['wifi', 'WiFi adı'],
+    ['mealCards', 'Yemek kartları (virgülle ayırın)', 'full'],
   ];
   function renderInfo() {
     const s = M.settings;
-    $('#infoForm').innerHTML = '<h2>Ерөнхий мэдээлэл</h2>' + FIELDS.map(([k, label, cls, type]) => {
+    $('#infoForm').innerHTML = '<h2>Genel bilgiler</h2>' + FIELDS.map(([k, label, cls, type]) => {
       const v = k === 'mealCards' ? (s.mealCards || []).join(', ') : (s[k] ?? '');
       return `<label class="field ${cls || ''}"><span>${label}</span>${type === 'textarea' ? `<textarea name="${k}" rows="4">${esc(v)}</textarea>` : `<input name="${k}" value="${esc(v)}">`}</label>`;
     }).join('');
@@ -301,11 +301,11 @@
     $('#hoursEditor').innerHTML = s.hours.map((h, i) => {
       const r = s.openRules[i];
       return `<div class="hrow" data-i="${i}">
-        <input data-k="label" value="${esc(h.label)}" aria-label="Өдрүүд (текст)" placeholder="Өдрүүд">
-        <input data-k="value" value="${esc(h.value)}" aria-label="Цаг (текст)" placeholder="Цаг">
-        <input data-k="open" value="${esc(r.open)}" aria-label="Нээх цаг" placeholder="10:00" pattern="\\d{1,2}:\\d{2}">
-        <input data-k="close" value="${esc(r.close)}" aria-label="Хаах цаг" placeholder="23:00" pattern="\\d{1,2}:\\d{2}">
-        <button class="mini danger" data-rmh="${i}" aria-label="Мөр устгах" type="button">${I.ui('close')}</button>
+        <input data-k="label" value="${esc(h.label)}" aria-label="Günler (metin)" placeholder="Günler">
+        <input data-k="value" value="${esc(h.value)}" aria-label="Saatler (metin)" placeholder="Saatler">
+        <input data-k="open" value="${esc(r.open)}" aria-label="Açılış saati" placeholder="10:00" pattern="\\d{1,2}:\\d{2}">
+        <input data-k="close" value="${esc(r.close)}" aria-label="Kapanış saati" placeholder="23:00" pattern="\\d{1,2}:\\d{2}">
+        <button class="mini danger" data-rmh="${i}" aria-label="Satırı sil" type="button">${I.ui('close')}</button>
         <div class="days">${DAYS.map((d, di) => `<label><input type="checkbox" data-day="${di}" ${r.days.includes(di) ? 'checked' : ''}>${d}</label>`).join('')}</div>
       </div>`;
     }).join('');
@@ -328,7 +328,7 @@
   /* ---------- backup ---------- */
   function renderMeta() {
     const when = M.savedAt || meta.updatedAt;
-    $('#metaInfo').textContent = `Эх сурвалж: ${meta.source === 'blob' ? 'Vercel Blob' : meta.source === 'local' ? 'Локал' : 'Анхны өгөгдөл'}` + (when ? ` · Сүүлд хадгалсан: ${new Date(when).toLocaleString('mn-MN')}` : '') + (M.version ? ` · Хувилбар ${M.version}` : '');
+    $('#metaInfo').textContent = `Kaynak: ${meta.source === 'blob' ? 'Vercel Blob' : meta.source === 'local' ? 'Yerel' : 'Varsayılan veri'}` + (when ? ` · Son kayıt: ${new Date(when).toLocaleString('tr-TR')}` : '') + (M.version ? ` · Sürüm ${M.version}` : '');
   }
   $('#exportBtn').onclick = () => {
     const a = document.createElement('a');
@@ -340,26 +340,26 @@
     const f = e.target.files[0]; e.target.value = ''; if (!f) return;
     try {
       const d = JSON.parse(await f.text());
-      if (!d.settings || !Array.isArray(d.items) || !Array.isArray(d.categories)) throw new Error('Файлын бүтэц буруу');
-      M = d; M.settings.gallery ||= []; markDirty(); renderAll(); toast('Оруулсан. Хадгалах товчийг дарна уу.');
+      if (!d.settings || !Array.isArray(d.items) || !Array.isArray(d.categories)) throw new Error('Dosya yapısı geçersiz');
+      M = d; M.settings.gallery ||= []; markDirty(); renderAll(); toast('İçe aktarıldı. Lütfen Kaydet düğmesine basın.');
     } catch (err) { toast(err.message, true); }
   };
   $('#resetBtn').onclick = async () => {
-    if (!confirm('Бүх өөрчлөлтийг арилгаж анхны цэс рүү буцаах уу? (Хадгалах товч дарсны дараа хүчинтэй болно)')) return;
+    if (!confirm('Tüm değişiklikler silinip varsayılan menüye dönülsün mü? (Kaydet düğmesine bastıktan sonra geçerli olur)')) return;
     const d = await (await fetch('/data/default-menu.json', { cache: 'no-store' })).json();
     M = d; markDirty(); renderAll();
   };
 
   /* ---------- save ---------- */
   $('#saveBtn').onclick = async () => {
-    const btn = $('#saveBtn'); btn.disabled = true; btn.textContent = 'Хадгалж байна…';
+    const btn = $('#saveBtn'); btn.disabled = true; btn.textContent = 'Kaydediliyor…';
     try {
       const r = await api('/api/menu', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(M) });
-      M.version = r.version; M.savedAt = r.savedAt; markClean(); renderMeta(); toast('Амжилттай хадгалагдлаа. Цэс шинэчлэгдсэн.');
+      M.version = r.version; M.savedAt = r.savedAt; markClean(); renderMeta(); toast('Başarıyla kaydedildi. Menü güncellendi.');
     } catch (err) {
-      btn.disabled = false; btn.textContent = 'Хадгалах •';
-      if (err.status === 401) { toast('Нууц үг хүчингүй болсон. Дахин нэвтэрнэ үү.', true); ss.del(PW_KEY); }
-      else toast(err.message + (err.status === 503 ? '. Ноорог энэ төхөөрөмжид хадгалагдсан.' : ''), true);
+      btn.disabled = false; btn.textContent = 'Kaydet •';
+      if (err.status === 401) { toast('Oturum süresi doldu. Lütfen tekrar giriş yapın.', true); ss.del(PW_KEY); }
+      else toast(err.message + (err.status === 503 ? '. Taslak bu cihazda saklandı.' : ''), true);
     }
   };
 
