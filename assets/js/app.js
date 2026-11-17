@@ -334,7 +334,9 @@
       $('#menu').innerHTML = `<p class="empty">${esc(e.message)}. Lütfen sayfayı yenileyin.</p>`;
       return;
     }
+    window.SS_MENU = DATA;
     renderSettings(); renderMenu(); renderStatus();
+    document.dispatchEvent(new CustomEvent('ss:menu'));
     setInterval(renderStatus, 60_000);
     if (location.hash.startsWith('#item-')) goToItem(location.hash.slice(6));
   }

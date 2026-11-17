@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Masa QR kodları · Sultan Sofrası</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="/assets/img/emblem.png">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <style>
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 60px; }
+    .wrap h1 { font-family: var(--serif); color: var(--wine-ink); margin: 0 0 6px; }
+    .wrap > p { color: var(--muted); max-width: 640px; }
+    .grid2 { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); margin-top: 20px; }
+    .grid2 figure { margin: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 10px; text-align: center; break-inside: avoid; }
+    .grid2 img { width: 100%; height: auto; border-radius: 12px; }
+    .grid2 figcaption a { font-weight: 700; color: var(--wine); font-size: 14px; }
+    @media print { .grid2 { grid-template-columns: repeat(3, 1fr); } .noprint { display: none; } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="noprint"><a href="/qr">← QR kodlar</a></p>
+    <h1>Masa QR kodları</h1>
+    <p class="noprint">Her kod <code>/?table=N</code> adresine açılır; müşteri okutunca sipariş masa numarasıyla mutfağa gider. Yazdırmak için tarayıcıdan Yazdır'ı kullanın veya PNG indirin.</p>
+    <div class="grid2" id="grid"></div>
+  </main>
+  <script>
+    fetch('/api/config').then((r) => r.json()).catch(() => ({ tables: 30 })).then(({ tables }) => {
+      const g = document.getElementById('grid');
+      for (let i = 1; i <= (tables || 30); i++) {
+        g.insertAdjacentHTML('beforeend', `<figure><img src="/assets/qr/tables/masa-${i}.png" alt="Masa ${i} QR kodu" loading="lazy" width="560" height="770"><figcaption class="noprint"><a href="/assets/qr/tables/masa-${i}.png" download>PNG</a> · <a href="/assets/qr/tables/masa-${i}.svg" download>SVG</a></figcaption></figure>`);
+      }
+    });
+  </script>
+</body>
+</html>
