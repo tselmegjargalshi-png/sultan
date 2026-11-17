@@ -1,0 +1,47 @@
+/* Sultan Sofrası · QR sipariş (müşteri tarafı) */
+.addbtn { margin-left: 6px; display: inline-flex; align-items: center; gap: 6px; border: 0; cursor: pointer; font-weight: 800; font-size: 14px;
+  color: #fff; background: linear-gradient(135deg, var(--wine-soft), var(--wine-deep)); padding: 9px 14px; border-radius: 999px; box-shadow: 0 6px 14px -8px var(--wine-deep); }
+.addbtn:active { transform: scale(.96); }
+.stepper { margin-left: 6px; display: inline-flex; align-items: center; background: var(--cream); border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); }
+.stepper button { width: 36px; height: 36px; border: 0; background: none; font-size: 22px; font-weight: 700; color: var(--wine); cursor: pointer; border-radius: 50%; }
+.stepper output { min-width: 22px; text-align: center; font-weight: 800; }
+.card__foot { flex-wrap: wrap; row-gap: 8px; }
+
+.tablebadge { display: inline-flex; align-items: center; gap: 6px; font-weight: 800; font-size: 13px; color: var(--wine); background: var(--gold-pale);
+  padding: 6px 12px; border-radius: 999px; white-space: nowrap; }
+
+.ordbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: flex; gap: 8px; justify-content: center; padding: 10px 12px calc(12px + env(safe-area-inset-bottom));
+  pointer-events: none; }
+.ordbar > button { pointer-events: auto; border: 0; cursor: pointer; font-weight: 800; font-size: 15px; border-radius: 16px; padding: 14px 18px; box-shadow: 0 14px 30px -12px rgba(44, 6, 11, .7); }
+.ordbar .cartbtn { flex: 1; max-width: 460px; display: flex; justify-content: space-between; align-items: center; color: #fff; background: linear-gradient(135deg, var(--wine-soft), var(--wine-deep)); }
+.ordbar .mybtn { color: var(--wine); background: var(--paper); box-shadow: 0 14px 30px -12px rgba(44, 6, 11, .5), inset 0 0 0 1px var(--line); }
+.ordbar .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #2E9E5B; margin-right: 6px; animation: pulse 1.6s infinite; }
+@keyframes pulse { 50% { opacity: .35; } }
+body.has-ordbar { padding-bottom: 96px; }
+
+.ord-tabs { display: flex; gap: 6px; padding: 0 16px 10px; }
+.ord-tabs button { flex: 1; border: 0; padding: 10px; border-radius: 12px; font-weight: 800; background: var(--cream); color: var(--muted); cursor: pointer; }
+.ord-tabs button[aria-selected="true"] { background: var(--wine); color: #fff; }
+.ord-line { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; align-items: center; padding: 12px 0; border-bottom: 1px dashed var(--line); }
+.ord-line b { font-weight: 700; }
+.ord-line small { color: var(--muted); }
+.ord-line .stepper { margin: 0; }
+.ord-total { display: flex; justify-content: space-between; font-size: 20px; font-weight: 800; padding: 14px 0 6px; color: var(--wine-ink); }
+.ord-note { width: 100%; margin-top: 8px; border: 1px solid var(--line); border-radius: 14px; padding: 12px; font: inherit; background: #fff; resize: vertical; min-height: 64px; }
+.ord-err { color: #9B1C1C; font-weight: 700; margin: 8px 0 0; min-height: 1.2em; }
+.ord-empty { text-align: center; color: var(--muted); padding: 30px 10px; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+.track { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 14px; margin: 10px 0; }
+.track__head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.track__no { font-family: var(--serif); font-size: 24px; font-weight: 700; color: var(--wine-ink); }
+.track__state { font-weight: 800; font-size: 14px; padding: 5px 11px; border-radius: 999px; background: var(--gold-pale); color: var(--wine); }
+.track[data-status="ready"] .track__state { background: #D9F2E1; color: #146B3A; }
+.track[data-status="served"] .track__state { background: #ECE7DE; color: var(--muted); }
+.track[data-status="cancelled"] .track__state { background: #F8DADA; color: #9B1C1C; }
+.steps { display: flex; gap: 4px; margin: 12px 0 8px; }
+.steps i { flex: 1; height: 6px; border-radius: 4px; background: var(--line); }
+.steps i.on { background: var(--wine-soft); }
+.track[data-status="ready"] .steps i.on { background: #2E9E5B; }
+.track ul { margin: 6px 0 0; padding-left: 18px; color: var(--ink); font-size: 14.5px; }
+.toast { position: fixed; left: 50%; bottom: 100px; transform: translateX(-50%); z-index: 90; background: var(--wine-ink); color: #fff; padding: 12px 18px; border-radius: 14px; font-weight: 700; max-width: 90vw; text-align: center; }

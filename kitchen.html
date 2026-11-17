@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mutfak · Sultan Sofrası</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#2C060B">
+  <link rel="icon" type="image/png" href="/assets/img/emblem.png">
+  <link rel="stylesheet" href="/assets/css/kitchen.css">
+</head>
+<body>
+  <section id="login" class="login">
+    <form id="loginForm" class="login__card" autocomplete="off">
+      <img src="/assets/img/emblem.png" alt="" width="120">
+      <h1>Mutfak ekranı</h1>
+      <p>Mutfak PIN kodunu girin</p>
+      <input id="pin" type="password" inputmode="numeric" autocomplete="current-password" placeholder="PIN" required>
+      <button class="kbtn kbtn--main" type="submit">Giriş</button>
+      <p class="err" id="loginErr" role="alert"></p>
+    </form>
+  </section>
+
+  <div id="app" hidden>
+    <header class="khead">
+      <h1>Mutfak</h1>
+      <span class="live" id="live" title="Bağlantı durumu">● bağlanıyor</span>
+      <span class="count" id="count"></span>
+      <div class="khead__tools">
+        <button class="kbtn" id="soundBtn">🔇 Sesi aç</button>
+        <button class="kbtn" id="fsBtn">⛶ Tam ekran</button>
+      </div>
+    </header>
+    <div id="alert" class="alertbar" hidden><span id="alertText"></span><button class="kbtn kbtn--main" id="ackBtn">Tamam, gördüm</button></div>
+    <main class="board" id="board"></main>
+  </div>
+
+  <script src="/assets/js/kitchen.js"></script>
+</body>
+</html>
